@@ -1,5 +1,6 @@
-use reqwest::Client;
+// use reqwest::Client;
 use tokio::task;
+use reqwest;
 
 
 #[tokio::main]
@@ -107,17 +108,28 @@ async fn main() {
     r"https://seagypsy-couture.myshopify.com"
     ];
 
-    let client = Client::new();
+    // let client = Client::new();
+    let client = reqwest::Client::builder()
+                .timeout(std::time::Duration::from_secs(10))
+                .proxy(reqwest::Proxy::https("http://127.0.0.1:7890").unwrap())
+                //.redirect(RedirectPolicy::limited(10))
+                .build().unwrap();
     let mut tasks = Vec::new();
 
     for url in urls {
         let client = client.clone(); // Clone the client for each task.
         let url = url.to_string(); // Clone the URL for the move into the task.
         tasks.push(task::spawn(async move {
-            match client.get(&url).send().await {
+            match client.get(&url)
+                        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                        .send().await {
                 Ok(response) => {
                     if let Ok(body) = response.text().await {
-                        println!("{}", body);
+                        // println!("{}", body);
+                        let first_ten_chars: String = body.chars().take(100).collect();
+                        println!("{}", first_ten_chars);
+
+
                     } else {
                         eprintln!("链接响应体读取失败: {}", url);
                     }
