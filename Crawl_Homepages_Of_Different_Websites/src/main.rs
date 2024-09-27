@@ -1,8 +1,10 @@
 #![allow(dead_code)]
 
 mod common;
-use reqwest::Response;
 use common::txt::get_lines;
+
+
+use reqwest::Response;
 // use reqwest::Client;
 use tokio::task;
 use reqwest;
@@ -130,6 +132,7 @@ async fn main() {
                 }
                 Err(e) => {
                     eprintln!("网址请求错误: {} 错误: {}", url, e);
+                    
                 }
             }
         }));
