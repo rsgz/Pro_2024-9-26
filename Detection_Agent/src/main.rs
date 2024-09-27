@@ -20,7 +20,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .proxy(reqwest::Proxy::https("http://127.0.0.1:7890")?)
         .build()?;
 
-    let url = "https://ipv4.icanhazip.com/";
+    let url = "https://uncle-mikes-bake-shoppe.myshopify.com";
     // let url = "https://www.ipchicken.com/";
     // let url = "http://survivalarcherysystems.myshopify.com";
     let response = client.get(url)

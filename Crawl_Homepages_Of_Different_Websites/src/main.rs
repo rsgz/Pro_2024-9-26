@@ -106,12 +106,15 @@ async fn main() {
         let client = client.clone(); // Clone the client for each task.
         let url = url.to_string(); // Clone the URL for the move into the task.
         tasks.push(task::spawn(async move {
+
             match client.get(&url)
                     .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
-                    .send().await {
+                    .send()
+                    .await {
                 Ok(response) => {
                     let write_path = r"C:\Users\Administrator\Desktop\rust_url_666.txt";
                     // extract_and_save_urls(response, write_path).await.expect("处理 链接失败");
+                    println!("{}-->{:?}",i,response);
                     if let Err(e) = extract_and_save_urls(response, write_path).await {
                         eprintln!("处理链接失败: {} 错误: {}", url, e);
                     };
