@@ -1,141 +1,135 @@
+#![allow(dead_code)]
+
+mod common;
+use reqwest::Response;
+use common::txt::get_lines;
 // use reqwest::Client;
 use tokio::task;
 use reqwest;
+use scraper::{Html, Selector};
+use std::fs::OpenOptions;
+use std::io::Write;
 
+// dbg!(urls);
+// println!("{:?}",urls);
+
+async fn extract_and_save_urls(response:Response, write_path:&str) -> Result<(), Box<dyn std::error::Error>> {
+    // let response1 = response.clone();
+    let final_url = response.url().clone();
+    let scheme = final_url.scheme(); // 获取协议，如 "http" 或 "https"
+    let domain = final_url.host_str().expect("No domain found").to_string();
+    let full_domain = format!("{}://{}", scheme, domain); // 将协议和域名组合
+    dbg!(&full_domain);
+    println!("1");
+    // println!(response.text());
+    let body = match response.text().await {
+        Ok(text) => {
+            println!("{}", text);
+            text
+        },
+        Err(e) => {
+            eprintln!("读取响应文本错误: {}", e);
+            String::from("0")
+        },
+    };
+
+    // let body = response.text().await?;
+    println!("1.1");
+    let fragment = Html::parse_document(&body);
+    println!("1.2");
+    let selector = Selector::parse("a").unwrap();
+    println!("1.3");
+    println!("2");
+
+    let mut file = OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open(write_path)
+        .expect("无法创建文本文件");
+    println!("3");
+    for element in fragment.select(&selector) {
+        println!("4");
+        if let Some(href) = element.value().attr("href") {
+            println!("5");
+            if !href.starts_with("javascript:") && !href.contains("cdn.") {
+                println!("6");
+                let full_url = if href.starts_with("http://") || href.starts_with("https://") {
+                    println!("7");
+                    href.to_string()
+                }
+                else {
+                    println!("8");
+                    // 如果是相对路径，则与基础URL拼接
+                    if href.starts_with('/') {
+                        format!("{}{}", full_domain, href)
+                    } else {
+                        format!("{}/{}", full_domain, href)
+                    }
+                };
+                println!("9");
+                println!("{:?}",full_url.as_str());
+                writeln!(file, "{}", full_url.as_str()).expect("不能将链接写入到文本文件");
+            }
+        }
+    }
+
+    Ok(())
+}
 
 #[tokio::main]
 async fn main() {
-    let urls = vec![
-        r"https://rweverydayessentials.myshopify.com",
-    r"http://planetbachelorette.myshopify.com",
-    r"https://florencescoveljewelry876-com.myshopify.com",
-    r"https://666c0d-2.myshopify.com",
-    r"https://weddink.myshopify.com",
-    r"https://demo-jdsmarketing.myshopify.com",
-    r"https://b09944-88.myshopify.com",
-    r"https://michellesmess.myshopify.com",
-    r"https://announce-it.myshopify.com",
-    r"https://sam-nail-supply.myshopify.com",
-    r"https://frenzy-flare.myshopify.com",
-    r"https://minty-tees.myshopify.com",
-    r"https://www-gspotzone-com.myshopify.com",
-    r"https://candy-wrapper-store.myshopify.com",
-    r"https://tbs-transfers.myshopify.com",
-    r"http://charm-fig.myshopify.com",
-    r"https://the-celebration-place.myshopify.com",
-    r"https://elliefont-styles.myshopify.com",
-    r"https://monogramsoffmadison-com.myshopify.com",
-    r"https://six-stories.myshopify.com",
-    r"https://neon-cowboys.myshopify.com",
-    r"https://littlebarnacles.myshopify.com",
-    r"https://yourmainevent.myshopify.com",
-    r"https://lisajaud13.myshopify.com",
-    r"https://something-new-bridal-box.myshopify.com",
-    r"https://ginger-squared.myshopify.com",
-    r"http://condom-usa.myshopify.com",
-    r"https://bachelorette-priveco.myshopify.com",
-    r"http://inslee-by-design.myshopify.com",
-    r"https://sugarbabyaprons.myshopify.com",
-    r"https://double-k-originals.myshopify.com",
-    r"https://end-of-the-lane.myshopify.com",
-    r"https://one-blushing-bride.myshopify.com",
-    r"https://downtown-darling-wholesale.myshopify.com",
-    r"https://flower-moxie.myshopify.com",
-    r"https://figurama-collectors-limited.myshopify.com",
-    r"https://ohjuliettestore.myshopify.com",
-    r"https://georgia-hardinge.myshopify.com",
-    r"https://the-obsessions-boutique.myshopify.com",
-    r"https://jelly-pop-shoes.myshopify.com",
-    r"https://scl-harborside.myshopify.com",
-    r"https://shopcarolineandcompany-com.myshopify.com",
-    r"https://adam-tucker.myshopify.com",
-    r"https://bill-blass.myshopify.com",
-    r"https://blondo-shop.myshopify.com",
-    r"https://femmeliberee-4547.myshopify.com",
-    r"https://shop-gottahavemypumps-com.myshopify.com",
-    r"http://tennessee-farrier-supply.myshopify.com",
-    r"https://sabah-us.myshopify.com",
-    r"https://yellow-box-footwear-shoes.myshopify.com",
-    r"https://prota-fiori.myshopify.com",
-    r"https://healthyfeet-store.myshopify.com",
-    r"https://honest-johns-trading-post.myshopify.com",
-    r"https://nanostudio-official.myshopify.com",
-    r"https://theme-tests-fastsimon.myshopify.com",
-    r"https://romika-usa.myshopify.com",
-    r"https://happy-feet-plus.myshopify.com",
-    r"https://mast-shoes.myshopify.com",
-    r"https://sandpad-store-demo.myshopify.com",
-    r"https://caverleyshoes-com.myshopify.com",
-    r"https://zou-xou-shoes.myshopify.com",
-    r"https://bt-beloria-infinity.myshopify.com",
-    r"https://sabah-4.myshopify.com",
-    r"https://malone-souliers.myshopify.com",
-    r"https://mave-and-chez.myshopify.com",
-    r"https://bakers-shoes-store.myshopify.com",
-    r"https://flyshoesleather.myshopify.com",
-    r"https://covid19-dev.myshopify.com",
-    r"https://hobson-shoes.myshopify.com",
-    r"https://webberry-my.myshopify.com",
-    r"https://vintage-redefined.myshopify.com",
-    r"https://seliga-shoes.myshopify.com",
-    r"https://sole-shoes-new-zealand.myshopify.com",
-    r"https://boundless-theme-apparel.myshopify.com",
-    r"https://besty-fisher.myshopify.com",
-    r"https://staud-dev-test.myshopify.com",
-    r"https://1a1cae-3.myshopify.com",
-    r"https://hush-puppies-philippines.myshopify.com",
-    r"https://minnies-treasure-chest.myshopify.com",
-    r"https://bvstore-26045.myshopify.com",
-    r"https://bata-pakistan.myshopify.com",
-    r"https://little-fox-fashions.myshopify.com",
-    r"https://shoeplanet-pk.myshopify.com",
-    r"https://hushpuppiespk.myshopify.com",
-    r"https://mafalda-shoes.myshopify.com",
-    r"https://e9ff52-3.myshopify.com",
-    r"https://the-blue-body-brazil.myshopify.com",
-    r"https://friday-night-dolls-boutique.myshopify.com",
-    r"https://litlookz-studio.myshopify.com",
-    r"https://thatgirl-studios.myshopify.com",
-    r"https://89cc07-2.myshopify.com",
-    r"https://257750-2.myshopify.com",
-    r"https://beeglee-in.myshopify.com",
-    r"https://beginningboutique-us.myshopify.com",
-    r"https://violate-the-dress-code.myshopify.com",
-    r"https://3466f3-a5.myshopify.com",
-    r"https://vested-by-monet.myshopify.com",
-    r"https://pixies-lounge-online.myshopify.com",
-    r"https://misters-choices.myshopify.com",
-    r"https://seagypsy-couture.myshopify.com"
-    ];
+    // 拿到了 所有链接
+    let file_path = r"C:\Users\Administrator\Desktop\遍历网址.txt";
+    let urls = match get_lines(file_path) {
+        Ok(urls) => urls,
+        Err(e) => {
+            eprintln!("打开文件失败: {}", e);
+            // return Err(e);
+            Vec::new()
+        }
+    };
 
+    // 创建 请求对象
     // let client = Client::new();
     let client = reqwest::Client::builder()
                 .timeout(std::time::Duration::from_secs(10))
                 .proxy(reqwest::Proxy::https("http://127.0.0.1:7890").unwrap())
                 //.redirect(RedirectPolicy::limited(10))
                 .build().unwrap();
+
+    // 并发任务 都放里面
     let mut tasks = Vec::new();
 
-    for url in urls {
+    for (i,url) in urls.into_iter().enumerate() {
         let client = client.clone(); // Clone the client for each task.
         let url = url.to_string(); // Clone the URL for the move into the task.
         tasks.push(task::spawn(async move {
             match client.get(&url)
-                        .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
-                        .send().await {
+                    .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3")
+                    .send().await {
                 Ok(response) => {
-                    if let Ok(body) = response.text().await {
-                        // println!("{}", body);
-                        let first_ten_chars: String = body.chars().take(100).collect();
-                        println!("{}", first_ten_chars);
+                    let write_path = r"C:\Users\Administrator\Desktop\rust_url_666.txt";
+                    // extract_and_save_urls(response, write_path).await.expect("处理 链接失败");
+                    if let Err(e) = extract_and_save_urls(response, write_path).await {
+                        eprintln!("处理链接失败: {} 错误: {}", url, e);
+                    };
+                    // if let Ok(body) = response.text().await {
+                    //     // println!("{}", body);
+                    //     let first_ten_chars: String = body.chars().take(100).collect();
+                    //     println!("{}", first_ten_chars);
 
+                    // } else {
+                    //     eprintln!("链接响应体读取失败: {}", url);
+                    // }
 
-                    } else {
-                        eprintln!("链接响应体读取失败: {}", url);
+                    if i%10000==0 {
+                        println!("{:?}-->{:?}", i,url);
                     }
+
+
                 }
                 Err(e) => {
-                    eprintln!("网址请求错误: {} with error: {}", url, e);
+                    eprintln!("网址请求错误: {} 错误: {}", url, e);
                 }
             }
         }));
