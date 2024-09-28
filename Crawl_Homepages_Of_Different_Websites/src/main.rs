@@ -14,6 +14,50 @@ use std::io::Write;
 
 // dbg!(urls);
 // println!("{:?}",urls);
+/*
+我这个版本 会有大量的链接 访问会报错 只有一小部分 能访问  我感觉 问题在并发上面
+*/
+
+
+async fn extract_and_save_urls2(response: Response, write_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let final_url = response.url().clone();
+    let scheme = final_url.scheme();
+    let domain = final_url.host_str().expect("No domain found").to_string();
+    let full_domain = format!("{}://{}", scheme, domain);
+
+    let body = match response.text().await {
+        Ok(text) => text,
+        Err(e) => {
+            eprintln!("读取响应文本错误: {}", e);
+            return Err(e.into());
+        }
+    };
+
+    let fragment = Html::parse_document(&body);
+    let selector = Selector::parse("a").unwrap();
+
+    let mut file = OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open(write_path)
+        .expect("无法创建文本文件");
+
+    for element in fragment.select(&selector) {
+        if let Some(href) = element.value().attr("href") {
+            if !href.starts_with("javascript:") && !href.contains("cdn.") {
+                let full_url = if href.starts_with("http://") || href.starts_with("https://") {
+                    href.to_string()
+                } else {
+                    format!("{}{}", full_domain, href)
+                };
+
+                writeln!(file, "{}", full_url)?;
+            }
+        }
+    }
+
+    Ok(())
+}
 
 async fn extract_and_save_urls(response:Response, write_path:&str) -> Result<(), Box<dyn std::error::Error>> {
     // let response1 = response.clone();
@@ -114,8 +158,9 @@ async fn main() {
                 Ok(response) => {
                     let write_path = r"C:\Users\Administrator\Desktop\rust_url_666.txt";
                     // extract_and_save_urls(response, write_path).await.expect("处理 链接失败");
-                    println!("{}-->{:?}",i,response);
-                    if let Err(e) = extract_and_save_urls(response, write_path).await {
+                    // println!("{}-->{:?}",i,response);
+
+                    if let Err(e) = extract_and_save_urls2(response, write_path).await {
                         eprintln!("处理链接失败: {} 错误: {}", url, e);
                     };
                     // if let Ok(body) = response.text().await {
@@ -127,6 +172,70 @@ async fn main() {
                     //     eprintln!("链接响应体读取失败: {}", url);
                     // }
 
+
+                    // let response1 = response.clone();
+
+
+
+
+                    // let final_url = response.url().clone();
+                    // let scheme = final_url.scheme(); // 获取协议，如 "http" 或 "https"
+                    // let domain = final_url.host_str().expect("No domain found").to_string();
+                    // let full_domain = format!("{}://{}", scheme, domain); // 将协议和域名组合
+                    // dbg!(&full_domain);
+                    // println!("1");
+                    // // println!(response.text());
+                    // let body = match response.text().await {
+                    //     Ok(text) => {
+                    //         println!("{}", text);
+                    //         text
+                    //     },
+                    //     Err(e) => {
+                    //         eprintln!("读取响应文本错误: {}", e);
+                    //         String::from("0")
+                    //     },
+                    // };
+
+                    // // let body = response.text().await?;
+                    // println!("1.1");
+                    // let fragment = Html::parse_document(&body);
+                    // println!("1.2");
+                    // let selector = Selector::parse("a").unwrap();
+                    // println!("1.3");
+                    // println!("2");
+
+                    // let mut file = OpenOptions::new()
+                    //     .create(true)
+                    //     .append(true)
+                    //     .open(write_path)
+                    //     .expect("无法创建文本文件");
+                    // println!("3");
+                    // for element in fragment.select(&selector) {
+                    //     println!("4");
+                    //     if let Some(href) = element.value().attr("href") {
+                    //         println!("5");
+                    //         if !href.starts_with("javascript:") && !href.contains("cdn.") {
+                    //             println!("6");
+                    //             let full_url = if href.starts_with("http://") || href.starts_with("https://") {
+                    //                 println!("7");
+                    //                 href.to_string()
+                    //             }
+                    //             else {
+                    //                 println!("8");
+                    //                 // 如果是相对路径，则与基础URL拼接
+                    //                 if href.starts_with('/') {
+                    //                     format!("{}{}", full_domain, href)
+                    //                 } else {
+                    //                     format!("{}/{}", full_domain, href)
+                    //                 }
+                    //             };
+                    //             println!("9");
+                    //             println!("{:?}",full_url.as_str());
+                    //             writeln!(file, "{}", full_url.as_str()).expect("不能将链接写入到文本文件");
+                    //         }
+                    //     }
+                    // }
+
                     if i%10000==0 {
                         println!("{:?}-->{:?}", i,url);
                     }
@@ -135,7 +244,13 @@ async fn main() {
                 }
                 Err(e) => {
                     eprintln!("网址请求错误: {} 错误: {}", url, e);
-                    
+                    let write_path_err = r"C:\Users\Administrator\Desktop\rust_url_err1.txt";
+                    let mut file = OpenOptions::new()
+                        .create(true)
+                        .append(true)
+                        .open(write_path_err)
+                        .expect("无法创建文本文件");
+                    writeln!(file, "{}", url).expect("失败链接 写入到文本文件 遇到问题!");
                 }
             }
         }));

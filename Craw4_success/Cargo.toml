@@ -1,0 +1,18 @@
+[package]
+name = "Craw4_success"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[dependencies]
+reqwest = {version = "0.12.7"} 
+scraper = "0.20.0"
+csv="1.1"
+tokio = { version = "1", features = ["full"] }
+regex = "1"
+url = "2.2"
+chrono="0.4.38"
+
+[build-dependencies]
+embed-resource = "2.4.2"
+winres = "^0.1"
