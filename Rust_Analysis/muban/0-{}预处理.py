@@ -26,7 +26,8 @@ o3 = r"""
 '''
 print(sentence)
 """
-s = o1+huan+o2+quchu_shouhang(s)+quchu_shouhang(o3)
+s = huan+o2+quchu_shouhang(s)+quchu_shouhang(o3)
 s = s.replace("{","{{").replace("}","}}")  # 兼容{}语法
 new_text = s.replace(v1,f"{{{v1}}}")
-print(new_text)
+last = o1+new_text  # o1放到替换变量之后加上去,防止被替换
+print(last)
