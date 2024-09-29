@@ -17,4 +17,8 @@ fn main() {
         return;  // 提前退出程序
     };
     println!("{:#?}",dir_set);
+
+    for zi in dir_set{
+        
+    }
 }
