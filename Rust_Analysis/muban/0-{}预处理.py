@@ -19,6 +19,8 @@ if i%10000==0 {
     println!("{:?}-->{:?}", i,url);
 }
 """
+start = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码生成 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"
+end = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码结束 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"
 huan = '\n'
 o1 = f'{v1} = ""  # {tishi} '  # obj = "vvv"  # 请输入 打印对象叫啥名字
 o2 = "sentence = f'''\\"+"\n"              # sentence = f"""\
@@ -29,5 +31,5 @@ print(sentence)
 s = huan+o2+quchu_shouhang(s)+quchu_shouhang(o3)
 s = s.replace("{","{{").replace("}","}}")  # 兼容{}语法
 new_text = s.replace(v1,f"{{{v1}}}")
-last = o1+new_text  # o1放到替换变量之后加上去,防止被替换
+last = start+huan+o1+huan+new_text+end  # o1放到替换变量之后加上去,防止被替换
 print(last)
