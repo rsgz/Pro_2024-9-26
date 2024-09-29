@@ -1,0 +1,15 @@
+# Rust cargo metadata
+Cargo.lock
+
+# The target directory contains the compiled artifacts
+target/
+
+# Dependency sources (if you are using a dependency manager)
+**/node_modules/
+**/bower_components/
+
+# These directories are not relevant to the repository
+**/coverage/
+**/Selendroid/
+**/tmp/
+**/temp/
