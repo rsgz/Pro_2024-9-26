@@ -1,7 +1,8 @@
-use std::fs::File;
-use std::path::Path;
-use std::io::{self, BufRead, BufReader};
+// use std::fs::File;
+// use std::path::Path;
+// use std::io::{self, BufRead, BufReader};
 use std::fs;
+use std::io;
 
 // 调用这个函数 直接可以获取 文本文件里面  所有行数据
 /*
@@ -18,6 +19,7 @@ let mut urls = match get_lines(file_path) {
 dbg!(urls);
 */
 
+/*
 pub fn get_lines<P>(filename: P) -> io::Result<Vec<String>>
 where
     P: AsRef<Path>,
@@ -34,6 +36,8 @@ where
 
     Ok(lines)
 }
+
+*/
 
 
 // fn main()-> io::Result<()>{
