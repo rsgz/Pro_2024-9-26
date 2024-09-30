@@ -4,6 +4,7 @@
 #![allow(unused_mut)]
 #![allow(unused_must_use)]
 
+use std::path::PathBuf;  // 拼接路径
 use std::fs;  // 获取目录
 // use std::io;
 use std::collections::HashSet;  // 去重
@@ -31,36 +32,54 @@ where
     Ok(lines)
 }
 
-fn main(){
-    let dir_path = r"C:\Users\Administrator\Desktop\data\err"; 
-    let mut dir_set: fs::ReadDir = fs::read_dir(dir_path).unwrap();
-    
-    let mut lines = Vec::new();  // 这个就是存储 所有的文本行
-    for (i,dir) in dir_set.into_iter().enumerate(){
-        let mulu_file: fs::DirEntry = dir.expect("解析dir出现问题");
-        let file_name = mulu_file.path().to_string_lossy().into_owned();
-        println!(">>>>>> s ---> {:#?}",file_name);
-        let mut urls: Vec<String> = get_lines(file_name).unwrap();
-        //  一步去重
-        let urls_set: HashSet<String> = urls.drain(..).collect();
-        urls = urls_set.into_iter().collect();
-
-        for line in urls {
-            lines.push(line);
-        }
-    }
-
-    let file_path = r"C:\Users\Administrator\Desktop\all3.txt"; // 保存的文件路径
+fn xin(file_path:&str)->io::Result<File>{
     let mut file = OpenOptions::new()
         .create(true)
         .append(true)
         .open(file_path)
         .expect("无法创建文本文件");
+    Ok(file)
+}
 
-    for (i,k) in lines.iter().enumerate(){
-        if i % 10000 == 0 { // 每1000条记录打印一次
-            println!("{}-->{}",i,k);
+
+fn main(){
+    // 这个小项目  是想实现 
+    let file_path = r"C:\Users\Administrator\Desktop\data\err"; 
+    let mut urls: Vec<String> = get_lines(file_path).unwrap();
+
+    let base_dir = r"C:\Users\Administrator\Desktop\split"; // 保存的文件路径
+    let mut path_save = PathBuf::new();
+    path_save.push(base_dir);
+
+    let mut fenzu = Vec::new();
+    let fen_n = 20000;
+    let zu = if urls.len()%fen_n==0{
+        let zu = urls.len()/fen_n;
+        zu
+    }else{
+        let zu = urls.len() as f64 /fen_n as f64;
+        let zu2 = zu.ceil() as usize;
+        zu2
+    };
+
+    for i in 0..zu{
+        // fenzu.push((i*20000,(i+1)*20000));
+        fenzu.push((i*fen_n,(i+1)*fen_n));
+    }
+
+    //  一步去重
+    // let urls_set: HashSet<String> = urls.drain(..).collect();
+    // urls = urls_set.into_iter().collect();
+    for (i,line) in urls.iter().enumerate() {
+        for xiaozu in fenzu{
+            // if 20000*j<i<20000*(j+1)
+            let (start, end) = xiaozu;
+            if start<i && i<end{
+                let path_save_i = path_save.clone();
+                path_save_i.push(start.to_string());
+                let file_current = xin(path_save);
+                writeln!(file, "{}", k).expect("不能将链接写入到文本文件"); 
+            }
         }
-        writeln!(file, "{}", k).expect("不能将链接写入到文本文件");
     }
 }

@@ -28,4 +28,21 @@ borrow later used here
 temporary value is freed
 let file_name_str = entry.path().to_string_lossy().into_owned();
 println!(">>>>>> File path ---> \n{:#?}", file_name_str);
+
+>>> 5
+问题
+cannot index into a value of type(usize,usize)
+if xiaozu[0]<i && i<xiaozu[1]
+解决
+试图对一个元组 (usize, usize) 使用索引操作，这在 Rust 中是不允许的
+let (start, end) = xiaozu; // 使用模式匹配来解构元组
+if start<i && i<end
+
+>>> 6
+问题
+type `(usize, usize)` cannot be dereferenced
+let (start, end) = *xiaozu;
+解决
+let (start, end) = xiaozu;
+
 """
