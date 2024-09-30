@@ -8,4 +8,9 @@ match 语句 冗长
 let dir_set: ReadDir
 ReadDir数据类型 实现了 Iterator特质
 特质 Iterator 有一个关联类型 Item  指定了迭代器每次迭代返回的类型
+
+dir_set: fs::ReadDir --> Iterator<Item = Result<DirEntry, Error>>
+for dir in dir_set{
+
+}
 """
