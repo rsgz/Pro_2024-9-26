@@ -32,7 +32,7 @@ where
 }
 
 fn main(){
-    let dir_path = r"C:\Users\Administrator\Desktop\data\data"; 
+    let dir_path = r"C:\Users\Administrator\Desktop\data\err"; 
     let mut dir_set: fs::ReadDir = fs::read_dir(dir_path).unwrap();
     
     let mut lines = Vec::new();  // 这个就是存储 所有的文本行
@@ -50,7 +50,7 @@ fn main(){
         }
     }
 
-    let file_path = r"C:\Users\Administrator\Desktop\all2.txt"; // 保存的文件路径
+    let file_path = r"C:\Users\Administrator\Desktop\all3.txt"; // 保存的文件路径
     let mut file = OpenOptions::new()
         .create(true)
         .append(true)
