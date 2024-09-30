@@ -34,8 +34,8 @@ async function run() {{
 run();
 
 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ v2 数据复制到粘贴板 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀
-// 使用的时候 一定要立即切换到 浏览器主界面 navigator 安全性限制 必须是用户行为
-// 延迟函数 1
+// 使用的时候 一定要立即切换到 浏览器主界面 navigator 安全性限制 必须是 用户行为
+// 延迟函数
 function delay(ms) {{
     return new Promise(resolve => setTimeout(resolve, ms));
 }}
