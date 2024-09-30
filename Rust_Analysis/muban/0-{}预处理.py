@@ -8,16 +8,8 @@ def quchu_shouhang(s):
     return new_text
 
 s = r"""
-print!("{:?}",obj);
-print!("{:#?}",obj);
-println!("{:?}",obj);
-println!("{:#?}",obj);
-dbg!(obj);
-
-// 打印频率
-if i%10000==0 {
-    println!("{:?}-->{:?}", i,url);
-}
+let dir_set = obj.unwrap();
+println!("{:#?}",dir_set);
 """
 start = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码生成 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"
 end = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码结束 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"
