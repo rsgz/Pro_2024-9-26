@@ -11,12 +11,8 @@ fn main(){
     let dir_path = r"\\PC-202407311638\share"; 
     let mut dir_set: fs::ReadDir = fs::read_dir(dir_path).unwrap();
     for (i,dir) in dir_set.into_iter().enumerate(){
-        if i==i{
-            let mulu_file: fs::DirEntry = dir.expect("解析dir出现问题");
-            // let s = mulu_file.path().display();
-            let s = mulu_file.path().to_string_lossy().into_owned();
-            // println!(">>>>>> s ---> \n{:#?}",mulu_file.path().display());
-            println!(">>>>>> s ---> {:#?}",s);
-        }
+        let mulu_file: fs::DirEntry = dir.expect("解析dir出现问题");
+        let file_name = mulu_file.path().to_string_lossy().into_owned();
+        println!(">>>>>> s ---> {:#?}",file_name);
     }
 }
