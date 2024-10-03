@@ -3,8 +3,8 @@
 # 解析 = "fs::read_dir(dir_path)"
 # 想获取 = "dir_set"  # 你想获取解析对象里面的什么子元素呢？
 
-解析 = "dir"
-想获取 = "mulu"  # 你想获取解析对象里面的什么子元素呢？
+解析 = "lie_to_vec(path,0)"
+想获取 = "lie_a_set"  # 你想获取解析对象里面的什么子元素呢？
 sentence = f""" 
 
 
