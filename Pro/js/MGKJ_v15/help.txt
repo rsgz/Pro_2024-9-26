@@ -1,0 +1,122 @@
+a0030
+
+site:developer.chrome.com/docs web_accessible_resources
+
+这是练习开发谷歌扩展的一个版本记录
+MGKJ_v7  这个版本 对于事件的监听重构一下，可以对广告配置界面 右键增加广告行，可以保存广告值
+
+问题记录：
+1 浏览器js访问本地文件
+2 浏览器js调用c++接口是不是可以访问本地文件？：WebAssembly在浏览器中调用C++函数来读取本地文件
+3 怎么实现自然语言转换成代码？
+4 报错 Uncaught SyntaxError: await is only valid in async functions and the top level bodies of modules
+5 await只能在异步函数和模块的顶层作用域中使用
+6 get_wish_info(); // 一定要等待这一步操作完成 才能执行后面的操作 怎么办呢？？？
+7 Promise 的方式又怎么实现上面的想法呢
+8 chrome.runtime.onMessage.addListener  这个方法会一直执行吗
+9 <input class="input3" type="text" name="" id="startData" value="2023/7/25" />  获取这个输入框的值 id方式
+10 js数组data_set_arr=[1,2,3,4]  两个data_set_arr相加得到data_set_arr=[1,2,3,4,1,2,3,4]  然后我要下标0-6的元素组成新的[1,2,3,4,1,2,3]
+11 start_data='2023/2/4',end_data='2023/3/2' js 计算这两个日期间隔多少天
+12 const repeatedArray = originalArray.concat(originalArray, originalArray);里面的originalArray, originalArray参数假设有n个呢？
+13 3/2  js化成整数
+14 广告词 里面的字符串填写过多时 表格会自由伸缩  这一点不好 我想固定表格单元格的长度和宽度
+15 想设置三个单元格的宽度占比 10% 10% 80% 这个设置宽度比例 没有起作用
+16 使用软件的流程过于复杂，有没有什么办法能记录电脑上点击的每一个按钮和滑块，以及拖拽的动作脚本。然后执行脚本能还原动作。
+17 Failed to execute 'querySelectorAll' on 'Document': 'h4.modal-title:contains("导入更新价格库存")' is not a valid selector.
+       at <anonymous>:2:10
+18 三列td设置宽度比 10% 10% 80% 是可以奏效的 按照1:1:8的宽度显示  但是增加了 table里面设置宽度100% 设置 上面的设置就不管用了
+19 td+input type="text" 结合的方式  是不是可以控制我的三列单元格宽度为1:1:8？
+20 调整input框和框里面文字的距离
+21 添加一个按钮将三列输入框里面的值保存到谷歌插件的本地数据里面
+22 获取 chrome.storage.local.数据
+23 当页面加载完成或者刷新页面的时候 执行某个动作
+24 input_list  是一个input列表，如果把input列表所有的值都存储到一个数组里呢？利用什么循环比较合适 还是回调函数？
+25 我这个匿名函数 怎么转化为箭头函数  var valuesArray = Array.from(document.querySelectorAll('.column1'), function(input) {return input.value;});
+26 chrome.storage.local.set   chrome.storage.local.get  这两个做到了存储数据和获取数据，这种存储数据的方式是永久的吗？这个数据存储到哪里了？
+27 写一个js逻辑 实现 我右键 三列td的时候 或者任意一行td的时候 都会出现菜单，菜单功能很简单，1 末尾增加一行td 2 删除当前一行td
+28 这是 在当前行的末尾增加一列  换个角度 我想末尾增加一行呢？
+29 background-color: #00aaaa;  设置背景颜色透明度
+30 newRow=document.createElement('tr').appendChild(document.createElement('td'));
+   这个只是建立了 tr里面包裹一个td
+   我想一个tr里面包含三个td
+31 input1.classList.add()  input怎么增加三个属性  type="text" class="column1" value="type2"
+32 当菜单创建出来了  如果鼠标点击的地方不是id="addRow"或者id="deleteRow"  就移除ul菜单
+33 menu 菜单建立之前判断一下 页面中有没有menu，没有的话才建立，有的话就忽略此次右键
+34 document.querySelectorAll('ul')?.[0].remove()   我这种处理方式为什么会报错 ？
+35 ad_keyword.js  里面有动态的增加table的行
+   怎么 增加行之后真正的保存这些行到ad_keyword.html呢？ 我现在动态能成功增加但是一刷新又变成了ad_keyword.html里面的两行了
+36 ad_keyword.html里面的所有数据能在点击保存按钮的时候保存到本地文件里面吗？刷新页面的时候从本地文件读取数据生成表格？不要使用chrome.storage.local.set方法  这个保存的内容太小了
+37 chrome.storage.local  能保存多久？  C:\Users\YourUsername\AppData\Local\Google\Chrome\User Data\Default\IndexedDB
+38 增加一个导出按钮,将页面中table的所有值都导出到本地文件csv中
+39 已经能够实现 抓取单独的元素了
+40 能恢复历史记录 就是监听所有input元素内容 就可以实现了
+41 10版本开始模块化
+2023-11-28 店小蜜下架产品 更新一点快捷操作
+
+await delay(200);
+
+
+帮助链接：
+调试扩展 https://developer.chrome.com/docs/extensions/mv3/tut_debugging/
+HTML  https://web.dev/learn/html/
+CSS   https://web.dev/learn/css/
+JS    https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript
+正则表达式  https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern
+空值合并运算符 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing
+可选链运算符 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+文档对象模型 https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model
+JavaScript API： https://developer.mozilla.org/zh-CN/docs/Web/API
+谷歌应用商店发布   https://developer.chrome.com/docs/webstore/publish/
+谷歌API          https://developer.chrome.com/docs/extensions/reference/
+API 完整列表      https://developer.chrome.com/docs/extensions/mv3/devguide/
+npm 包chrome-types   https://www.npmjs.com/package/chrome-types
+web术语   https://developer.mozilla.org/zh-CN/docs/Glossary/IDE
+清单架构 https://json.schemastore.org/chrome-manifest
+清单文件  chrome-extension://YOUR_EXTENSION_ID/manifest.json
+清单格式 https://developer.chrome.com/docs/extensions/mv3/manifest/
+权限 https://developer.chrome.com/docs/extensions/mv3/declare_permissions/
+主机权限     https://developer.chrome.com/docs/extensions/mv3/match_patterns/
+内容脚本     https://developer.chrome.com/docs/extensions/mv3/content_scripts/
+开发者模式   chrome://extensions
+谷歌博客     https://web.dev/blog/
+Chrome DevTools  https://developer.chrome.com/docs/devtools/
+开发者工具文档      https://developer.chrome.com/docs/devtools/overview/
+断点         https://developer.chrome.com/docs/devtools/javascript/breakpoints/#dom
+扩展开发手册   https://developer.chrome.com/docs/extensions/mv3/devguide/
+“activeTab”允许什么   https://developer.chrome.com/docs/extensions/mv3/manifest/activeTab/#what-activeTab-allows
+权限警告  https://developer.chrome.com/docs/extensions/mv3/permission_warnings/#required_permissions
+注入脚本和CSS  https://developer.chrome.com/docs/extensions/reference/scripting/
+Window.localStorage  https://developer.mozilla.org/docs/Web/API/Window/localStorage
+不同谷歌版本的 工作者进程 的 生命周期   https://developer.chrome.com/docs/extensions/mv3/service_workers/service-worker-lifecycle/#idle-and-shutdown
+source.chromium    https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/themes/browser_theme_pack.cc?q=file:chrome%2Fbrowser%2Fthemes%20symbol:kDisplayProperties$
+清单键    https://developer.chrome.com/docs/extensions/mv3/manifest/
+
+该activeTab权限授予扩展在当前活动选项卡上执行代码的临时能力。它还允许访问当前选项卡的敏感属性。activeTab权限允许用户有目的地选择在焦点选项卡上运行扩展程序；这样，就保护了用户的隐私
+chrome.action.getBadgeText 方法获取当前标签页的徽章文本。徽章可以用来显示一些提醒或状态信息
+在manifest.json文件中注册 Service Worker
+Service Worker 是特殊的 JavaScript 环境，加载它来处理事件并在不再需要时终止
+元素后插入节点insertAdjacentElement https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+Classlist属性用于将 CSS 类名添加到元素类属性中
+JSON 对象描述扩展的功能和配置。例如，该"action"键声明 Chrome 应用作扩展程序的操作图标的图像
+以及单击扩展程序的操作图标时在弹出窗口中显示的 HTML 页面
+
+运算符与函数
+空值合并运算符（??）
+可选链运算符（?.）
+
+注意:
+1 必须将 manifest.json 文件放置在扩展的根目录中
+2 要对外部服务器进行 fetch 调用，您必须将 URL 声明为主机权限
+
+
+
+chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, message, function(response) {
+        // 在消息发送成功后执行的操作
+        console.log('');
+    });
+});
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse){
+
+})

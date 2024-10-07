@@ -1,0 +1,101 @@
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>shop6888 数据配置</title>
+</head>
+
+<body>
+<h1 class="bg-stone-600 text-xl font-semibold text-center text-orange-500">shop6888配置</h1>
+
+<div class="flex justify-center py-1">
+    <table id="myTable" class="rounded-lg bg-stone-400 text-center shadow-md">
+        <thead>
+        <tr>
+            <th>网站编号</th>
+            <th>域名</th>
+            <th>邮箱</th>
+            <th>联系电话</th>
+            <th>顶部告示语</th>
+            <th>SEO页面标题</th>
+            <th>SEO页面关键词</th>
+            <th>SEO页面描述</th>
+            <th>幻灯片1</th>
+            <th>幻灯片2</th>
+        </tr>
+        </thead>
+    
+        <tbody class="table-fixed ">
+        <tr>
+            <td><input type="text" class="column1 text-center" value="xxxx"></td>
+            <td><input type="text" class="column2 text-center" value="xxxx"></td>
+            <td><input type="text" class="column3 text-center" value="xxxx"></td>
+            <td><input type="text" class="column4 text-center" value="xxxx"></td>
+            <td><input type="text" class="column5 text-center" value="xxxx"></td>
+            <td><input type="text" class="column6 text-center" value="xxxx"></td>
+            <td><input type="text" class="column7 text-center" value="xxxx"></td>
+            <td><input type="text" class="column8 text-center" value="xxxx"></td>
+            <td><input type="text" class="column9 text-center" value="xxxx"></td>
+            <td><input type="text" class="column10 text-center" value="xxxx"></td>
+        </tr>
+    
+        <tr>
+            <td><input type="text" class="column1 text-center" value="xxxx"></td>
+            <td><input type="text" class="column2 text-center" value="xxxx"></td>
+            <td><input type="text" class="column3 text-center" value="xxxx"></td>
+            <td><input type="text" class="column4 text-center" value="xxxx"></td>
+            <td><input type="text" class="column5 text-center" value="xxxx"></td>
+            <td><input type="text" class="column6 text-center" value="xxxx"></td>
+            <td><input type="text" class="column7 text-center" value="xxxx"></td>
+            <td><input type="text" class="column8 text-center" value="xxxx"></td>
+            <td><input type="text" class="column9 text-center" value="xxxx"></td>
+            <td><input type="text" class="column10 text-center" value="xxxx"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!--<span>根据Chrome浏览器的文档，chrome.storage.local是用于在浏览器本地存储数据的API。它的数据是永久性的</span><br/>-->
+<!--<span>除非通过代码或用户手动删除，否则会一直保留在用户的浏览器中。</span><br/>-->
+<!--<span>然而，需要注意的是，尽管数据是永久性的，但它仅在用户使用同一台设备和同一台浏览器时可用。</span><br/>-->
+<!--<span>如果用户更换设备或清除浏览器缓存，存储在chrome.storage.local中的数据将会丢失。</span><br/>-->
+<!--<span>因此，chrome.storage.local是一个很好的选择来存储用户的偏好设置、本地状态或其他持久性数据，但不适合用于需要跨设备或跨浏览器访问的数据</span>-->
+<!--<span>存储方式:</span>-->
+<!--<span>1 chrome.storage.local 的存储容量是有限的，通常限制在几兆字节</span>-->
+<!--<span>2 localStorage保存的数据大小有限制，通常为几MB</span>-->
+<!--<span>3 服务器端数据库 存储大小无限制</span>-->
+<!--<span>4 IndexedDB IndexedDB 是一种浏览器内置的数据库，用于在客户端存储结构化数据。</span>-->
+<!--<span>5 Web SQL Database API 来实现数据的存取，但是在某些浏览器中已被废弃，因此在开发应用程序时应考虑使用其他替代方案，例如IndexedDB</span>-->
+<div class="flex justify-center items-center space-x-40 bg-stone-600 py-1">
+    <button type="button" id="save-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        保存
+    </button>
+    
+    <button type="button" id="delete-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        清空
+    </button>
+
+    <button type="button" id="exportToCSV_button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        导出为CSV
+    </button>
+    <button type="button" id="importCSV_button" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+        导入
+    </button>
+
+    <input type="file" id="csvFileInput" class="py-1 px-4 border rounded bg-yellow-500 hover:bg-yellow-700 text-white font-bold">
+</div>
+
+
+<!-- <button type="button" id="save-button">保存</button>
+<button type="button" id="exportToCSV_button">导出为CSV</button>
+<button type="button" id="importCSV_button">导入</button> -->
+<!-- <input type="file" id="csvFileInput"> -->
+
+
+
+<script type="text/javascript" src="../js/cdn.tailwindcss.com/3.4.5.js"></script>
+<script type="text/javascript" src="..\js\myshopify_shop6888_peizhi.js"></script>
+</body>
+</html>

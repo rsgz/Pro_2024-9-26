@@ -1,0 +1,365 @@
+body, html {
+  height: 100%; /* 确保html和body元素的高度都为100% */
+  max-height: 230px;
+  margin: 0; /* 清除默认的margin */
+  /*display: flex; !* 使用flex布局 *!*/
+  align-items: center; /* 垂直居中对齐 */
+
+}
+
+/*body{*/
+/*  width: 790px;*/
+/*  height: 100px;*/
+/*}*/
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.radio-inputs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.5rem;
+  background-color: #EEE;
+  box-sizing: border-box;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+  padding: 0.25rem;
+  width: 300px;
+  font-size: 14px;
+}
+
+.radio-inputs .radio {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.radio-inputs .radio input {
+  display: none;
+}
+
+.radio-inputs .radio .name {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  padding: .5rem 0;
+  color: rgba(51, 65, 85, 1);
+  transition: all .15s ease-in-out;
+}
+
+.radio-inputs .radio input:checked + .name {
+  background-color: #fff;
+  font-weight: 600;
+}
+
+.submenu {
+  padding-left: 20px;
+  display: none;
+}
+
+.active .submenu {
+  display: block;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #dadce0;
+}
+
+ul li:last-child {
+  border-bottom: none;
+}
+
+ul li:hover {
+  background-color: #f6f9fe;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #202124;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+form {
+  display: inline-block;
+  border: 1px solid #dadce0;
+  /*min-width: 500px;*/
+  min-width: 789px;
+  max-width:790px;
+  max-height:800px;
+}
+
+form {
+  width: 100%; /* form元素宽度为100% */
+  max-height: 100%; /* 设置最大高度为100% */
+  overflow-y: auto; /* 当内容超出高度时显示滚动条 */
+}
+
+h1 {
+  background: #f6f9fe;
+  margin: 0;
+  padding: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.tabs {
+  border-top: 1px solid #dadce0;
+  border-bottom: 1px solid #dadce0;
+  display: flex;
+}
+
+/*
+.tabs label:first-child {
+  border-right: 1px solid grey;
+}
+*/
+
+.tabs label.selected {
+  background: rgb(228 229 224);
+  font-weight: bold;
+}
+
+.tabs label {
+  display: block;
+  background: #f6f9fe;
+  text-align: center;
+  width: 100%;
+  padding: 2px 0;
+  margin: 0;
+}
+
+.tabs input {
+  display: none;
+}
+
+.label2 {
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
+  /*border-top: 1px solid #dadce0;*/
+}
+
+input.input3{
+  width:58%;!important;
+  margin-left: 0px;
+}
+
+.button3{
+  height:20px;
+  width:45px;
+  display: inline;
+}
+
+.btnauto{
+  width:auto;
+}
+
+
+
+.label3{
+  margin: 0;
+  display: flex;
+  text-align: center;
+  padding-bottom: 2px;
+}
+
+.label4{
+  margin: 0;
+  display: block;
+  /*position: fixed;*/
+  float:left;
+  text-align: center;
+  padding-bottom: 2px;
+}
+
+.b{
+  font-weight: bold;
+}
+
+.w40{
+  width: 40px;
+}
+
+.w50{
+  width: 50px;
+}
+
+.w60{
+  width: 60px;
+}
+
+.w70{
+  width: 70px;
+}
+
+.w80{
+  width: 80px;
+}
+
+.w90{
+  width: 90px;
+}
+
+.w100{
+  width: 100px;
+}
+
+.w150{
+  width: 150px;
+}
+.w200{
+  width: 200px;
+}
+.w250{
+  width: 250px;
+}
+
+.w300{
+  width: 300px;
+}
+
+.w350{
+  width: 350px;
+}
+
+.w400{
+  width: 400px;
+}
+
+.w450{
+  width: 450px;
+}
+
+.w500{
+  width: 500px;
+}
+
+.w550{
+  width: 550px;
+}
+
+.w600{
+  width: 600px;
+}
+
+.w650{
+  width: 650px;
+}
+
+.w700{
+  width: 700px;
+}
+
+.w750{
+  width: 750px;
+}
+
+.a:hover{
+  /*border:1px solid greenyellow;*/
+  color: #f5116b;
+  cursor:pointer;
+  font-weight: bold;
+}
+
+.left{
+  float:left;
+}
+
+.m0{
+  margin:0px;
+}
+
+.m1{
+  margin:1px;
+}
+
+.m2{
+  margin:2px;
+}
+
+.m3{
+  margin:3px;
+}
+
+
+.mar0{
+  margin-right: 0px;
+}
+
+.mar1{
+  margin-right: 1px;
+}
+
+.mar2{
+  margin-right: 2px;
+}
+
+.mar3{
+  margin-right: 3px;
+}
+
+.mar4{
+  margin-right: 4px;
+}
+
+.mar5{
+  margin-right: 5px;
+}
+
+.mar10{
+  margin-right: 20px;
+}
+
+.mar20{
+  margin-right: 20px;
+}
+
+.mar30{
+  margin-right: 30px;
+}
+
+.mar40{
+  margin-right: 40px;
+}
+
+.mar50{
+  margin-right: 50px;
+}
+
+.hint {
+  margin: 0 20px;
+  background: #f6f6f6;
+  padding: 7px 12px;
+}
+
+.buttons {
+  display: flex;
+  margin: 20px;
+}
+
+.buttons button {
+  margin-right: 15px;
+}
+
+input[type="checkbox"]{
+  /*margin-right: 10px;*/
+  margin-top: 1px;
+}
+

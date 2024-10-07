@@ -1,0 +1,519 @@
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>芒果扩展</title>
+    <link rel="stylesheet" href="CSS/popup.css"/>
+</head>
+
+<body id="body1">
+<h1>优米科技快捷操作V15.15</h1>
+<form>
+    <!--选项卡页面-->
+    <div class="tabs">
+        <label class="selected label2">
+            Timu
+            <input type="radio" name="type" value="Timu01" id="a0020" checked/>
+        </label>
+
+        <label class="label2">
+            芒果店长
+            <input type="radio" name="type" value="mangguodianzhang01" id="a0021"/>
+        </label>
+
+        <label class="label2">
+            店小蜜
+            <input type="radio" name="type" value="dxm01" id="a001"/>
+        </label>
+
+        <label class="label2">
+            merchant
+            <input type="radio" name="type" value="merchant01" id="a002"/>
+        </label>
+
+        <label class="label2">
+            myshopify
+            <input type="radio" name="type" value="myshopify01" id="a003"/>
+        </label>
+
+        <label class="label2">
+            其他
+            <input type="radio" name="type" value="rsgz01" id="a004"/>
+        </label>
+    </div>
+
+    <!--选项卡详情页面-->
+    <div id="tabContentContainer">
+        <div id="Timu01" class="tab-content">
+            <!-- Timu 的内容 -->
+            <h2>Timu</h2>
+            <p>这是<b>发货台</b>的内容。目前可以抢发货台(就是普通备货单)和自动发货,结束按s，表示停止stop,需要用鼠标先点击网页然后按s才有效果
+            </p>
+
+            <p>
+                <span class="a" target="_blank" id="timu_1">后台</span>|
+                <span class="a" target="_blank" id="timu_2">普通备货单</span>|
+                <span class="a" target="_blank" id="timu_3">发货台</span>|
+            </p>
+            <label class="label3">
+                <span>点击频率:</span>
+                <label for="a0022">
+                    <span>start</span>
+                    <input class="input3" type="text" name="" id="a0022" value="1000"/>ms
+                </label>
+
+                <label for="a0023">
+                    <span>end</span>
+                    <input class="input3" type="text" name="" id="a0023" value="2000"/>ms
+                </label>
+
+                <label for="a0029">
+                    <span>台号</span>
+                    <input class="input3" type="text" name="" id="a0029" value="1"/>
+                </label>
+
+                <label for="a0026">
+                    <input class="input3" type="text" name="" id="a0026" value="3"/>s后运行
+                </label>
+
+                <label>
+                    <button class="button3" type="button" id="a0024">开始</button>
+                </label>
+
+                <label>
+                    <button class="button3" type="button" id="a0025">结束</button>
+                </label>
+            </label>
+
+            <label class="label4"><span class="mar50">确认自动发货?</span><label>
+                <button class="button3 mar30" type="button" id="a0027">发货</button>
+
+                <div>
+                    <span class="a" id="a0038">销量排行</span>|
+                </div>
+
+        </div>
+
+
+        <div id="mangguodianzhang01" class="tab-content">
+            <!-- 芒果店长 的内容 -->
+            <h2>芒果店长</h2>
+            <p>这是芒果店长的内容。</p>
+
+            <div>
+                <div>
+                    <a target="_blank" id="mangguo_7"
+                       href="https://www.mangoerp.com/erp/#/erp/online/wish/">wish在线产品</a>|
+                </div>
+
+                <div>
+                    <a target="_blank" id="mangguo_1"
+                       href="https://www.mangoerp.com/erp/#/erp/order/shipment/search/status/%E5%B7%B2%E5%8F%91%E8%B4%A7/delivered">已发货:</a>
+                    <span class="a" target="_blank" id="mangguo_8">已发货</span>
+                </div>
+                <div>
+                    <span>平台:</span>
+                    <span class="a" target="_blank" id="mangguo_2">wish</span>
+                    <span class="a" target="_blank" id="mangguo_12">ozon</span>
+                </div>
+                <div>
+                    发货时间:
+                    <span class="a" target="_blank" id="mangguo_14">无</span>|
+                </div>
+                <div>
+                    打印时间:
+                    <span class="a" target="_blank" id="mangguo_9">今天</span>|
+                    <span class="a" target="_blank" id="mangguo_4">昨天</span>|
+                    <span class="a" target="_blank" id="mangguo_3">近1个月</span>|
+                    <span class="a" target="_blank" id="mangguo_10">近2个月</span>|
+                    <span class="a" target="_blank" id="mangguo_11">近3个月</span>|
+                </div>
+
+                <div>
+                    订单状态:
+                    <span class="a" target="_blank" id="mangguo_5">已退款</span>|
+                    <span class="a" target="_blank" id="mangguo_6">待处理</span>|
+                </div>
+
+                <div>
+                    导出:
+                    <span class="a" target="_blank" id="mangguo_13">ozon包裹</span>|
+                </div>
+
+                <div>
+                    数据:
+                    <span class="a" target="_blank" id="mangguo_15">加载全部</span>|
+                    <span class="a" target="_blank" id="mangguo_16">江西衣服低价小于40</span>|
+                    <span class="a" target="_blank" id="mangguo_17">比基尼低价小于50</span>|
+                    <span class="a" target="_blank" id="mangguo_18">tank裙摆低价小于80</span>|
+                </div>
+
+                <div>
+                    <a target="_blank" href="https://www.mangoerp.com/erp/#/erp/product/wish/outbox">草稿箱:</a>
+                    <span class="a" target="_blank" id="mangguo_19">导入</span>|
+                    <span class="a" target="_blank" id="mangguo_20">女上衣分类</span>|
+                    <span class="a" target="_blank" id="mangguo_21">自动运费计算</span>|
+                    <span class="a" target="_blank" id="mangguo_22">国家运费</span>|
+                    <span class="a" target="_blank" id="mangguo_23">全新</span>|
+                    <input class="w50" type="text" name="" id="a0017" value=""/>
+                    <span class="a" target="_blank" id="mangguo_24">物流1</span>|
+                    <span class="a" target="_blank" id="mangguo_25">图片all</span>|
+                    <span class="a" target="_blank" id="mangguo_27">单色图</span>|
+                    color_num:<input class="w50" type="text" name="" id="a0018" value=""/>
+                    xpath:<input class="w50" type="text" name="" id="a0019"
+                                 value='/html/body/div[5]/div[1]/div/div/mg-box/div/div[1]/div/form/div[9]/div[2]/div/table/tbody/tr[1]/td[5]/div[1]/select'/>
+                    <span class="a" target="_blank" id="mangguo_26">应用尺寸</span>|
+                    低重:<input class="w50" type="text" name="" id="a0028" value=""/>
+                    高重:<input class="w50" type="text" name="" id="a0035" value=""/>
+                    <span class="a" target="_blank" id="mangguo_29">3XL_xpath</span>|
+                    :<input class="w50" type="text" name="" id="a0036" value=""/>
+                    <span class="a" target="_blank" id="mangguo_28">3XL-8XL</span>|
+                    <span class="a" target="_blank" id="mangguo_30">页末</span>|
+
+                </div>
+            </div>
+        </div>
+
+        <div id="dxm01" class="tab-content active">
+            <!-- 店小蜜的内容 -->
+            <h2>店小蜜</h2>
+            <p>这是店小蜜-wish模块的内容。
+                <button class="button3" type="button" id="yeshou">页首</button>
+                <button class="button3" type="button" id="yemo">页末</button>
+                |
+                <span class="a" id="dian_9">300</span>|
+                <span class="a" id="dian_8">筛选</span>|
+                <span class="a" id="dian_5">测0</span>|
+                <span class="a" id="dian_6">下架</span>|
+                <span class="a" id="dian_7">下一页</span>|
+                <span class="a" id="dian_10">3下</span>|
+                <span class="a" id="dian_11">del</span>|
+            </p>
+
+            <div class="dxm02">
+                <!--   数据抓取   -->
+                <label class="label2">
+                    <span>数据抓取</span>
+                    <label class="label3">
+                        图片
+                        <input type="checkbox" name="pic" value="pic" id="a005">
+                    </label>
+
+                    <label class="label3">
+                        标题
+                        <input type="checkbox" name="title" value="title" id="a006">
+                    </label>
+
+                    <label class="label3">
+                        ID
+                        <input type="checkbox" name="prodoctId" value="prodoctId" id="a007">
+                    </label>
+
+                    <label class="label3">
+                        店铺名
+                        <input type="checkbox" name="shops" value="shops" id="a008">
+                    </label>
+
+                    <label class="label3">
+                        店铺等级
+                        <input type="checkbox" name="level" value="level" id="a009">
+                    </label>
+
+                    <label class="label3">
+                        人名
+                        <input type="checkbox" name="ren_ming" value="ren_ming" id="a0010">
+                    </label>
+
+                    <label class="label3">
+                        商户id
+                        <input type="checkbox" name="shanghu_id" value="shanghu_id" id="a0011">
+                    </label>
+
+                    <label class="label3">
+                        销售量
+                        <input type="checkbox" name="sale" value="sale" id="a0012">
+                    </label>
+
+                    <label class="label3">
+                        父sku
+                        <input type="checkbox" name="fusku01" value="fusku01" id="a0013">
+                    </label>
+
+                    <label class="label3">
+                        创建时间
+                        <input type="checkbox" name="creat_time" value="creat_time" id="a0014">
+                    </label>
+
+                    <label class="label3">
+                        更新时间
+                        <input type="checkbox" name="update_time" value="update_time" id="a0015">
+                    </label>
+
+                    <label class="label3">
+                        审核状态
+                        <input type="checkbox" name="audit_status" value="audit_status" id="a0016">
+                    </label>
+
+                    <button type="button" id="data_grap1">抓取</button>
+                </label>
+
+                <!--广告数据生成-->
+                <label class="label2">
+                    <span>广告数据生成</span>
+                    <label for="clothing_type">
+                        <span>服装大类</span>
+                        <input class="input3" type="text" name="" id="clothing_type" value="type1"/>
+                    </label>
+
+                    <label for="startData">
+                        <span>开始日期</span>
+                        <input class="input3" type="text" name="" id="startData" value="2023/7/25"/>
+                    </label>
+
+                    <label for="endData">
+                        <span>结束日期</span>
+                        <input class="input3" type="text" name="" id="endData" value="2023/8/23"/>
+                    </label>
+
+                    <label>
+                        <button class="button3" type="button" id="advertising">生成</button>
+                    </label>
+
+                    <label>
+                        <button class="button3" type="button" id="advertisingCopy">复制</button>
+                    </label>
+
+                    <label>
+                        <button class="button3" type="button" id="advertisingDel">移除</button>
+                    </label>
+
+                    <label>
+                        <a href="#" id="advertisingDisposition">配置</a>
+                    </label>
+                </label>
+
+                <!--sku替换-->
+                <label class="label2">
+                    <span>sku替换</span>
+                    <span></span>
+                    <label>老sku:
+                        <input class="input4" type="text" name="" id="lao_sku" value=""/>
+                    </label>
+
+                    <label>新sku:
+                        <input class="input4" type="text" name="" id="xin_sku" value=""/>
+                    </label>
+
+                    <label>
+                        <button class="button3" type="button" id="tihuan1">替换</button>
+                    </label>
+
+                </label>
+
+                <div>
+                    wish:
+                    <span class="a" target="_blank" id="dian_1">客服</span>|
+                    <span class="a" target="_blank" id="dian_2">待发布</span>|
+                    <span class="a" target="_blank" id="dian_3">wish在线产品</span>|
+                    <span class="a" target="_blank" id="dian_4">...</span>|
+                    <div>
+                        <p class="m0 b">-------------------你好-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_1">您好，请问有什么可以帮助您的呢</p>
+                        <p class="m0 a" id="dxm_id_kefu_2">我的荣幸</p>
+                        <p class="m0 a" id="dxm_id_kefu_3">非常抱歉，久等了</p>
+                        <p class="m0 a" id="dxm_id_kefu_4">请问您看中的是哪一款商品呢 能发送图片或者其他标志性的信息给我吗？我这边后台出了问题
+                            看不到您的商品图片</p>
+                        <p class="m0 b">-------------------开心-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_5">上帝保佑你</p>
+                        <p class="m0 a" id="dxm_id_kefu_6">上帝保佑您！祝您生活开心愉快</p>
+                        <p class="m0 b">-------------------尺寸图-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_7">你可以参考下面的尺寸图，他们的单位是按照厘米衡量的</p>
+                        <p class="m0 a" id="dxm_id_kefu_8">建议您测量一下自己的胸围哦，我们的单位是厘米</p>
+                        <p class="m0 a" id="dxm_id_kefu_9">建议您测量一下腰围哦，我们的单位是厘米</p>
+                        <p class="m0 b">-------------------抱歉-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_10">给您带来的困扰，非常抱歉</p>
+                        <p class="m0 b">-------------------发货-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_11">
+                            您好，您请放心，一般当天的订单当天就开始发货了，请您耐心等待哦</p>
+                        <p class="m0 a" id="dxm_id_kefu_12">
+                            您好，感谢您的耐心等待哦，您的产品已经发货了哦，只是物流信息的更新会有延迟</p>
+                        <p class="m0 b">-------------------改地址-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_13">
+                            您好，一般当天的订单当天就开始发货了，由于是跨国运输，商家无法远程干涉物流的包裹，请您能谅解哦</p>
+                        <p class="m0 a" id="dxm_id_kefu_14">
+                            您好，收货地址的设置方式是wish平台约束的哦，这边商家无法帮助您。请您多和其他wish消费者交流一下，看看是否有其他的解决方案</p>
+                        <p class="m0 b">-------------------材质-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_15">这件服装是采用聚酯纤维的材料制作的哦</p>
+                        <p class="m0 b">--------------- 价格 运费 货币--------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_16">您可以参考一下这个价格哦，没有包含运费</p>
+                        <p class="m0 a" id="dxm_id_kefu_17">
+                            出现这个原因是因为，产品价格本身是不包含运费的。变高了是加上了跨国运费的原因哦</p>
+                        <p class="m0 a" id="dxm_id_kefu_18">您好，一般都是显示你所在的国家货币</p>
+                        <p class="m0 a" id="dxm_id_kefu_19">运费部分，当您选择支付的时候会有相应的运费明细哦</p>
+                        <p class="m0 a" id="dxm_id_kefu_20">目前几种收款方式</p>
+                        <p class="m0 b">-------------------翻译bug-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_21">
+                            您好，由于翻译软件的问题，我没有理解您的意思，非常抱歉,这是翻译软件带来的困扰，请多多理解哦，能否尝试换种语言或者容易理解的话呢</p>
+                        <p class="m0 a" id="dxm_id_kefu_22">
+                            您好，wish后台这边有部分顾客产品并没有显示商品信息。出现了一些未知bug，所以为了能够提供正确的信息，请您将wish产品链接发送给我，这边会给出产品的相关帮助信息。</p>
+                        <p class="m0 b">-------------------怎么购买-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_23"> 您先进入产品页面选择尺寸然后选择颜色点击添加到购物车
+                            就可以购买了</p>
+                        <p class="m0 b">-------------------退货-------------------</p>
+                        <p class="m0 a" id="dxm_id_kefu_24">您好，我们的套装是分开卖的哦</p>
+                        <p class="m0 a" id="dxm_id_kefu_25">您好，您可以选择2pic表示上衣下衣一套，如果您选择的only
+                            1pic表示一件上衣或者裤子</p>
+                        <p class="m0 a" id="dxm_id_kefu_26">
+                            您好，非常理解您的心情，但是这边不建议您退款哦。路途遥远邮费的价值已经超过了一件衣服的价值了，如果您不喜欢可以赠送给自己的朋友哦,收获一份真诚的友谊。留一份真爱在人间</p>
+                        <p class="m0 a" id="dxm_id_kefu_27">可能您的情况比较复杂，这边在想一个解决方案，请您耐心等待哦</p>
+                        <p class="m0 a" id="dxm_id_kefu_28">
+                            您好，您是否能提供一下物流单号和产品图片举证一下呢，对您造成的困扰，非常抱歉</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="merchant01" class="tab-content">
+            <!-- merchant的内容 -->
+            <h2 class="m1">merchant</h2>
+            <p class="m0">这是merchant的内容。|
+                <a class="a" href="https://www.wish.com/c/61ab2e0ca7cd78bfa4c518e8">wish</a>|
+                <a class="a" href="https://web.baimiaoapp.com/image-to-excel">image-to-excel</a>|
+                <a class="a" href="https://tableconvert.com/zh-cn/html-to-markdown">markdown</a>|
+            </p>
+
+            <div class="m0">
+                <span class="m5">价格复制:</span>
+                汇率<input class="w80" type="text" name="" id="a0033" value="1"/>相对于美元来说
+                <span class="a" target="_blank" id="a0030">SIZE XS</span>|
+                <span class="a" target="_blank" id="a0031">SIZE 70cm</span>|
+                <span class="a" target="_blank" id="a0032">SIZE 70</span>|
+            </div>
+
+            <div>
+                <span class="mar5">图片转表格:</span>
+                <span class="a" target="_blank" id="a0034">复制表格</span>|
+            </div>
+
+        </div>
+
+        <div id="myshopify01" class="tab-content">
+            <!-- myshopify的内容 -->
+            <h2>myshopify</h2>
+            <div>
+                快捷: <span class="a" target="_blank" id="myshopify_jin_ru_wang_zhan_guan_li">网站管理</span>|
+                <span class="a" target="_blank" id="myshopify_jin_ru_kucun">库存</span>|
+                <span class="a" target="_blank" id="myshopify_zhuru_jq">Injection JQ</span>|
+                <!-- <span class="a" target="_blank" id="myshopify_2024_8_29_kucun_xiao">小库存</span>| -->
+                <!-- <span class="a" target="_blank" id="myshopify_2024_8_29_kucun_da">大库存</span>| -->
+                <span class="a" target="_blank" id="myshopify_2024_8_29_myshopify_guge_gengduo_btn_click">谷歌更多</span>|
+                <span class="a" target="_blank" id="myshopify_2024_8_29_myshopify_wangzhi_renyi">*myshopify</span>|
+            </div>
+            <div>
+                1 网站管理-->: <span class="a" target="_blank" id="myshopify_piliang_tian_jia_yu_ming">批添域名|</span>
+                <span class="a" target="_blank" id="myshopify_zhuo_se">着色</span>|
+                <span class="a" target="_blank" id="myshopify_yuming_bianhao">编域邮</span>|
+                范围:<input class="w80" type="text" name="" id="myshopify_wangzhan_bianhao_fanwei01" value="200-300"/>|
+                <span class="a" target="_blank" id="myshopify_you_dain_gaoshi">1-全局</span>|
+                <span class="a" target="_blank" id="myshopify_xuanze_fenlei">2-选择分类</span>|
+                <span class="a" target="_blank" id="myshopify_wenzhang_guanli_dibu_caidan">3-文章管理-底部菜单</span>|
+                <span class="a" target="_blank" id="myshopify_yijian_daoru_caidan">4-一键导入菜单</span>|
+                <span class="a" target="_blank" id="myshopify_shangping_shuliang">5.1-商品数量</span>|
+                <!-- <span class="a" target="_blank" id="myshopify_xiugai_jiage">5.2-修改库存价格</span>| -->
+                <!-- <span class="a" target="_blank" id="myshopify_shoujia_xiugai">售价</span>| -->
+                <!-- <span class="a" target="_blank" id="myshopify_shichangjia_xiugai">5.3-市场价</span>| -->
+                <!-- <span class="a" target="_blank" id="myshopify_an_fen_lei_dao_ru_shang_ping">按分类导入商品</span>| -->
+                <span class="a" target="_blank" id="myshopify_tian_jia_jing_tai">6-添加静态</span>|
+                <span class="a" target="_blank" id="myshopify_neibu_yulan">7-内部预览</span>|
+                <span class="a" target="_blank" id="myshopify_waibu_yulan">8-外部预览</span>|
+                <span class="a" target="_blank" id="myshopify_peizhi">9-配置</span>|
+            </div>
+            <div>
+                2 商导静态-->:<span class="a" target="_blank" id="myshopify_shangpingdaoru_jingtaiguanli_zhuose">商导/静态着色</span>|
+            </div>
+            <div>
+                3 usfakename-->:<span class="a" target="_blank" id="myshopify_huoqu_shenfen">获取身份</span>|
+            </div>
+            <div>
+                4 排除关键词:<input class="w650" type="text" name="" id="myshopify_paichu_key" value="Tee,Sweatshirt,Top,V-Neck,shirt"/>|<span class="a" target="_blank" id="myshopify_guolv_dianji">过滤点击</span>|
+            </div>
+
+            
+
+            
+
+        </div>
+
+        <div id="rsgz01" class="tab-content">
+            <!-- 其他的内容 -->
+            <h2>其他</h2>
+            <p>这是其他的常用快捷入口。</p>
+            <div class="qita">
+                <span class="a" target="_blank" id="others_2024_8_27_renyi_xiugai">修改网页</span>|
+                <span class="a" target="_blank" id="others_2024_8_27_buke_xiugai">不可修改</span>|
+                <span class="a" target="_blank" id="others_2024_8_27_genggai_beijing_tu">更改背景图</span>|
+                <span class="a" target="_blank" id="ohter_fuzhi_wenben">复制文本</span>|
+            </div>
+            <div class="360doc">
+                <a target="_blank" id="360_write_1" href="http://www.360doc.com/edit/writeartnew.aspx">360doc</a>|
+                <span class="a" target="_blank" id="add_style_360">add</span>|
+                <span class="a" target="_blank" id="caogaoxiang_360">草稿箱</span>|
+                <!-- <span class="a" target="_blank" id="shouyi_360">shou</span>| -->
+                <!-- <span class="a" target="_blank" id="xiazai">xiazai</span>| -->
+                <!-- <span class="a" target="_blank" id="xiazai_douyin">抖音</span>| -->
+            </div>
+
+            <div class="xiapi">
+                <!-- <a target="_blank" id="xiapi_1" href="https://seller.shopee.cn/">Shopee</a>| -->
+                <!-- <span class="a" target="_blank" id="xiapi_2" -->
+                      <!-- title="广告搜索栏 那些弹出来的关键词列表">广告搜索关键词</span>| -->
+                <!-- <span class="a" target="_blank" id="xiapi_3" -->
+                      <!-- title="下面表格中具体的 获取搜索量的关键词 以及对应的搜索量">关键词搜索量</span>| -->
+                <!-- <span class="a" target="_blank" id="xiapi_4" -->
+                      <!-- title="虾皮购物站带你 搜索框 复制关键词 例如：https://sg.xiapibuy.com/">站点关键词</span>| -->
+                <!-- <span class="a" target="_blank" id="xiapi_5" -->
+                      <!-- title="店铺产品中 获取图片 标题 产品id 父sku  父sku就是全球商品货号">店铺产品</span>| -->
+                <!-- <input class="w90" type="text" name="" id="xiapi_price1" value="100"/> -->
+                <!-- <span class="a" target="_blank" id="xiapi_6" title="商品折扣时候 批量填写价格">填写</span>| -->
+            </div>
+
+            <div class="pinduoduo">
+                <!-- <a target="_blank" id="pinduoduo_1" href="https://mobile.yangkeduo.com/">拼多多</a>| -->
+                <!-- <span class="a" target="_blank" id="pinduoduo_2" title="复制拼多多 商品图 链接">拼多多商品图</span>| -->
+
+            </div>
+
+            <div class="1688_rsgz">
+                <!-- <a target="_blank" id="1688_rsgz_1" href="https://detail.1688.com/">1688</a>| -->
+                <!-- <span class="a" target="_blank" id="1688_rsgz_2" title="复制1688 商品图 链接">1688商品图1</span>| -->
+                <!-- <span class="a" target="_blank" id="1688_rsgz_3" title="复制1688 商品图 链接">1688商品图2</span>| -->
+            </div>
+
+            <!-- <div class="douyin_rsgz"></div> -->
+            <!-- <a target="_blank" id="douyin_rsgz_1" href="https://www.douyin.com/">抖音</a>| -->
+            <!-- <span class="a" target="_blank" id="douyin_rsgz_2" title="适合 https://www.douyin.com/ 获取里面的视频链接">getvideo1</span>| -->
+            <!-- <span class="a" target="_blank" id="douyin_rsgz_3" title="适合 https://www.douyin.com/ 获取里面的视频链接">getvideo2</span>| -->
+
+            <!-- <div class="wishpost"> -->
+                <!-- <a target="_blank" id="wishpost_1" -->
+                   <!-- href="https://www.wishpost.cn/welcome/#/login?next=%2Forders-bag-search">wishpost</a>| -->
+                <!-- <span class="a" target="_blank" id="wishpost_x">登录</span>| -->
+                <!-- <span class="a" target="_blank" id="wishpost_3">申诉</span>| -->
+                <!-- <span class="a" target="_blank" id="wishpost_4">历史运费</span>| -->
+                <!-- <span class="a" target="_blank" id="wishpost_5">评估运费</span>| -->
+            <!-- </div> -->
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="scripts/content/mokuai.js"></script>
+<script type="text/javascript" src="js/popup.js"></script>
+
+
+</body>
+</html>
+

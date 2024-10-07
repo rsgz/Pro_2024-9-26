@@ -1,0 +1,129 @@
+{
+  "name": "芒果科技1.15.2",
+  "description": "2023-11-28 芒果科技店小蜜,芒果店长,wish,Timu一些便捷操作",
+  "version": "1.15.2",
+  "manifest_version": 3,
+
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+
+  "action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "点击使用快捷操作"
+  },
+
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": [ "logo.png",
+      "images/bg_body/*.jpg",
+    "images/bg_body/*.png"],
+      "matches": [ "*://*/*"]
+    }
+  ],
+
+  "permissions": ["scripting", "activeTab", "alarms",
+    "storage", "tabs", "webRequest",
+    "unlimitedStorage","notifications","contentSettings","downloads",
+    "clipboardWrite","clipboardRead",
+    "nativeMessaging"
+  ],
+
+  "host_permissions": [
+    "https://developer.chrome.com/*",
+    "http://www.rsgz.top/*",
+    "https://chat.chatgptdemo.net/*",
+    "http://www.360doc.com/*",
+    "https://*.mangoerp.com/*",
+    "https://*.shop6888.com/*",
+    "https://cdn.tailwindcss.com/*",
+    "https://*/*"
+  ],
+
+
+
+
+  "content_scripts": [
+    {
+
+      "js": [
+        "js/jquery.js",
+        "scripts/content/mokuai.js",
+        "scripts/content/chatgptdemo.js",
+        "scripts/content/dianpu_infos.js",
+        "scripts/content/dxm_zhua_data.js",
+        "scripts/content/dxm_main.js",
+        "scripts/content/wish_post.js",
+        "scripts/content/main_360doc.js",
+        "scripts/content/timu.js",
+        "scripts/content/mangguodianzhang.js",
+        "scripts/content/run_directly.js",
+        "scripts/content/self/rsgz_1688.js",
+        "scripts/content/self/rsgz_Bzhan.js",
+        "scripts/content/self/rsgz_douyin.js",
+        "scripts/content/self/rsgz_pinduoduo.js",
+        "scripts/content/self/rsgz_shopee.js",
+        "scripts/content/self/rsgz_wish.js",
+        "scripts/content/self/others.js",
+        "scripts/content/self_you_mi_ke_ji/usfakename.js",
+        "scripts/content.js"
+      ],
+      "all_frames": true,
+      "matches": [
+        "https://*/*",
+        "http://*/*",
+        "https://www.google.com/*",
+        "https://cdn.tailwindcss.com/*",
+        "https://b08-admin.shop6888.com/*",
+        "https://*.shop6888.com/*",
+        "https://*.usfakename.com/*",
+        "https://*.dianxiaomi.com/*",
+        "https://*.mangoerp.com/*",
+        "https://*.wishpost.cn/*",
+        "http://*.rsgz.top/*",
+        "https://developer.chrome.com/*",
+        "https://chat.chatgptdemo.net/*",
+        "http://www.360doc.com/*",
+        "https://kuajing.pinduoduo.com/*",
+        "https://www.wish.com/*",
+        "https://*.wish.com/*",
+        "https://web.baimiaoapp.com/*",
+        "https://www.bilibili.com/*",
+        "https://www.douyin.com/*",
+        "https://seller.shopee.cn/*",
+        "https://*.shopee.cn/*",
+        "https://*.xiapibuy.com/*",
+        "https://mobile.yangkeduo.com/*",
+        "https://detail.1688.com/*"
+      ]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "all_frames": true,
+      "js": ["js/jquery.js"],
+      "run_at": "document_start"
+    }
+  ],
+
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "mac": "Command+B"
+      }
+    }
+  }
+}
