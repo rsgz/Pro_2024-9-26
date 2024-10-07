@@ -22,7 +22,23 @@ for(var i=0;i<=30;i++){
 }
 console.log(u_all);
 copyTextToClipboard(u_all);
+span = findElementsContainingText(yuansu='span',text='下一页');
+span[0].click();
 
+
+// js字符串包含
+function findElementsContainingText(yuansu,text) {
+    // 选择文档中的所有元素
+    const allElements = document.querySelectorAll(yuansu);
+    
+    // 使用filter方法筛选出包含特定文本的元素
+    const matchingElements = Array.from(allElements).filter(element => {
+      // 使用toLowerCase确保搜索不区分大小写
+      return element.innerText.toLowerCase().includes(text.toLowerCase());
+    });
+  
+    return matchingElements;
+}
 
 // 处理字符串 https://xl3vintageclothing.myshopify.com › ...  把右边的都截取掉
 function cleanShopifyUrl(url) {
