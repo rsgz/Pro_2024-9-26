@@ -44,6 +44,7 @@
     "webRequestBlocking",
     "https://b08-admin.shop6888.com/#/goods/goodsManagement/*"
   ],
+  
 
   "host_permissions": [
     "https://developer.chrome.com/*",
