@@ -39,12 +39,9 @@
     "storage", "tabs", "webRequest",
     "unlimitedStorage","notifications","contentSettings","downloads",
     "clipboardWrite","clipboardRead",
-    "nativeMessaging",
-    "webRequest",
-    "webRequestBlocking",
-    "https://b08-admin.shop6888.com/#/goods/goodsManagement/*"
+    "nativeMessaging"
+    
   ],
-  
 
   "host_permissions": [
     "https://developer.chrome.com/*",

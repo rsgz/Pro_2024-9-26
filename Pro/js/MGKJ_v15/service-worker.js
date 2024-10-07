@@ -6,58 +6,7 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }  
 
-// 在background.js中，您可以监听并拦截请求，然后修改它们的参数
-chrome.webRequest.onBeforeRequest.addListener(
-    function(details) {
-      // 检查请求是否符合您要拦截的条件
-      /*
-      Request URL:https://b08-api.shop6888.com/apis/Action
-      method:POST
-      {"action":"goods.search","data":{"pageIndex":1,"pageSize":20,"keywords":" car "}}
-      */
-      if (details.method === 'POST' && url.href === 'https://b08-api.shop6888.com/apis/Action') {
-        /*
-        // 修改请求参数
-        let modifiedUrl = new URL(details.url);
-        modifiedUrl.searchParams.set('paramName', 'newValue');
-        
-        // 返回一个修改过的请求对象
-        return { redirectUrl: modifiedUrl.href };
-        */
 
-        try {
-            // 尝试解析请求体为JSON
-            requestJson = JSON.parse(decodeURIComponent(String.fromCharCode.apply(null, new Uint8Array(details.requestBody.raw[0].bytes))));
-          } catch (e) {
-            // 解析失败，可能是请求体不是JSON或者格式不正确
-            console.error('Error parsing request body:', e);
-            return; // 不修改请求
-          }
-    
-          // 检查请求体是否包含特定的action和数据
-          if (requestJson.action === 'goods.search' && requestJson.data) {
-            // 修改请求参数
-            requestJson.data.pageSize = 20000;
-    
-            // 将修改后的JSON对象转换回字符串
-            let modifiedRequestBody = JSON.stringify(requestJson);
-    
-            // 返回一个包含修改后请求体的请求对象
-            return {
-              requestHeaders: details.requestHeaders,
-              requestBody: {
-                raw: [{
-                  bytes: new TextEncoder().encode(modifiedRequestBody).buffer
-                }]
-              }
-            };
-          }
-      }
-    },
-    // { urls: ["<all_urls>"] },
-    { urls: ["https://b08-api.shop6888.com/apis/Action"] },
-    ["blocking", 'requestBody']
-  );
   
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
