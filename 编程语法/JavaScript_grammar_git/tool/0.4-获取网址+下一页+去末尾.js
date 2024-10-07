@@ -1,8 +1,5 @@
 /*
-这个版本将结果 ›以及后面的字符串都去除掉
-https://xl3vintageclothing.myshopify.com › ...
-https://castoreus.myshopify.com › products
-https://ussportsdownunder.myshopify.com › ...
+这个版本增加了移动到 下一页 那个span 延迟 点击span.innerText='下一页' 的按钮
 */
 u_all = ""
 for(var i=0;i<=30;i++){
