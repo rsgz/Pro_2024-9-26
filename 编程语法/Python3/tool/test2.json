@@ -1,0 +1,18 @@
+{
+  kind: Request,
+  url: Url
+{
+  scheme: "https",
+  cannot_be_a_base: false,
+  username: "",
+  password: None,
+  host: Some(Domain(
+  "baidu.com"
+  )),
+  port: None,
+  path: "/",
+  query: None,
+  fragment: None
+}, source: hyper:: Error(Connect, Custom
+{kind: UnexpectedEof, error: "unexpected EOF during handshake"})
+}

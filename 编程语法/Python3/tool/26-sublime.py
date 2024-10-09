@@ -1,0 +1,16 @@
+import pyperclip,pyautogui
+
+pyautogui.hotkey('alt', 'tab')
+pyautogui.hotkey('alt', 'F3')
+pyautogui.hotkey('home')
+pyautogui.hotkey('shift','end')
+pyautogui.hotkey('ctrl','x')
+pyautogui.hotkey('ctrl','alt','backspace')
+pyautogui.hotkey('ctrl','n')
+pyautogui.hotkey('ctrl','v')
+pyautogui.hotkey('ctrl','alt','q')
+pyautogui.hotkey('ctrl','alt','backspace')
+pyautogui.hotkey('f9')
+pyautogui.hotkey('ctrl','f')
+pyperclip.copy('http')
+pyperclip.paste()
