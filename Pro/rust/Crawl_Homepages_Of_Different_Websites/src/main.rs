@@ -1,8 +1,7 @@
 #![allow(dead_code)]
 
-mod common;
+pub mod common;
 use common::txt::get_lines;
-
 
 use reqwest::Response;
 // use reqwest::Client;
