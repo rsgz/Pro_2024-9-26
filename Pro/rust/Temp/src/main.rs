@@ -1,4 +1,5 @@
-use Temp::{Summary, Tweet};
+use Temp::{Summary,Tweet};
+
 
 fn main() {
     let tweet = Tweet {
@@ -9,6 +10,5 @@ fn main() {
         reply: false,
         retweet: false,
     };
-
     println!("1 new tweet: {}", tweet.summarize());
 }

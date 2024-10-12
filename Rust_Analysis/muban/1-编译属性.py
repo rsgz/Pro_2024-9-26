@@ -7,4 +7,5 @@ r"""
 // #[derive(Debug)]  // 该属性可以应用于 结构体、枚举和联合体 等类型
 #![allow(unused_mut)]  // 无需可变
 #![allow(unused_must_use)]  //
+#![allow(non_snake_case)]  //
 """

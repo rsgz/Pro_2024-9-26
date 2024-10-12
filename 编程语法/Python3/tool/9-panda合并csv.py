@@ -2,7 +2,7 @@ import pandas as pd
 import os
 j = os.path.join
 
-fu = r'C:\Users\Administrator\Desktop\数据\黑冰爬取'
+fu = r'C:\Users\Administrator\Desktop\数据\第五批\2-域名'
 excel_files = [file for file in os.listdir(fu) if file.endswith('.csv')]
 
 all_dataframes = []

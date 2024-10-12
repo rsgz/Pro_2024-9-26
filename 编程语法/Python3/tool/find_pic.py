@@ -12,9 +12,6 @@ import win32api, win32con
 
 r'''
 pip install pyautogui -i https://mirrors.aliyun.com/pypi/simple
-pip install sublime -i https://mirrors.aliyun.com/pypi/simple
-pip install sublime_plugin -i https://mirrors.aliyun.com/pypi/simple
-
 '''
 
 s = time.sleep
@@ -398,5 +395,7 @@ if __name__ == '__main__':
     small = "img_1.png"
     big = "img_2.png"
     # find_rectangle_save(small, big)  # 执行时间：0.18550801277160645 秒
-    find_rectangle_show(small, big)  # 执行时间：0.18550801277160645 秒
+    # find_rectangle_show(small, big)  # 执行时间：0.18550801277160645 秒
     # find_pic_click_center(small, big)  # 执行时间：0.12166190147399902 秒
+    im1 = "D:\0-code\rust_pro\rust_pro_git\编程语法\Python3\tool\dc\img\kucun\001.png"
+    find_pic_click_center_keep(small=im1, jieshu_tezheng=None, info='1', xiangsidu=0.98)
