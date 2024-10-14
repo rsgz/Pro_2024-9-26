@@ -96,7 +96,63 @@ document.getElementsByTagName('head')[0].appendChild(script);`
         })();
         console.log('jq插入成功!');
         */
-    
+    // 库存序号
+    if(request.myshopify_tianjia_kucun_xuhao==="myshopify_tianjia_kucun_xuhao"){
+        console.log("request.myshopify_tianjia_kucun_xuhao");
+        async function f1() {
+            try {
+                len = document.querySelectorAll(`table.el-table__body tr`).length;
+                for(var i=0;i<len;i++){
+                    var tr = document.querySelectorAll(`table.el-table__body tr`)[i];
+                    var title = tr.querySelectorAll(`td`)[3]; // title
+                    var id = tr.querySelectorAll(`td`)[1]; // id
+                    var danxuankuang = tr.querySelectorAll(`td`)[0];  // 单选框
+
+                    let new_title= String(i+1)+"--->"+title.innerText;
+                    title.innerText = new_title;
+                }
+            } catch (error) {
+                console.error("出现错误:", error);
+            }
+        }
+
+        f1();
+    }
+    // 库存连选
+    if(request.myshopify_kucun_lianxuan==="myshopify_kucun_lianxuan"){
+        console.log("request.myshopify_kucun_lianxuan");
+        async function f1() {
+            try {
+                var xuanze_fanwei = request.xuanze_fanwei;
+                const fanwei_start = xuanze_fanwei.trim().split('-')[0];
+                const fanwei_end = xuanze_fanwei.trim().split('-')[1];
+
+                console.log("选择范围:");
+                console.log(fanwei_start);
+                console.log(fanwei_end);
+
+                len = document.querySelectorAll(`table.el-table__body tr`).length;
+                for(var i=0;i<len;i++){
+                    var tr = document.querySelectorAll(`table.el-table__body tr`)[i];
+                    var title = tr.querySelectorAll(`td`)[3]; // title
+                    var id = tr.querySelectorAll(`td`)[1]; // id
+                    var danxuankuang = tr.querySelectorAll(`td`)[0];  // 单选框
+
+                    // let new_title= String(i+1)+"--->"+title.innerText;
+                    let flag_num = i+1;
+                    //title.innerText = new_title;
+                    if(Number(fanwei_start)<=flag_num&& flag_num<=Number(fanwei_end)){
+                        danxuankuang.querySelectorAll(`label`)[0].click();
+                    }
+                }
+            } catch (error) {
+                console.error("出现错误:", error);
+            }
+        }
+
+        f1();
+    }
+
     // 库存页面
     if (window.location.href.startsWith(shop6888_kucun_url)){
         if(request.myshopify_guolv_dianji==="myshopify_guolv_dianji"){

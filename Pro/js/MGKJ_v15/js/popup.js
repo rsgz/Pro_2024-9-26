@@ -357,6 +357,11 @@ $(function(){
 
     // 下面都是触发事件才发送消息    
     // 沟通 ---> content.js
+    $("#myshopify_tianjia_kucun_xuhao").click(()=>{send_to_content(message={myshopify_tianjia_kucun_xuhao:"myshopify_tianjia_kucun_xuhao"})});  // myshopify_tianjia_kucun_xuhao ---> content.js
+    // 沟通 ---> content.js
+    $("#myshopify_kucun_lianxuan").click(()=>{
+        const xuanze_fanwei = $("#myshopify_kucun_lianxuan_fanwei")[0].value;
+        send_to_content(message={myshopify_kucun_lianxuan:"myshopify_kucun_lianxuan",xuanze_fanwei})});  // myshopify_kucun_lianxuan ---> content.js
     $("#myshopify_guolv_dianji").click(()=>{
         const key_paichu = $("#myshopify_paichu_key")[0].value;
         send_to_content(message={myshopify_guolv_dianji:"myshopify_guolv_dianji",key_paichu})});  // myshopify_guolv_dianji ---> content.js

@@ -1,8 +1,8 @@
 
 
-v = "myshopify_guolv_dianji"
+v = "myshopify_tianjia_kucun_xuhao"
 url = "https://b08-admin.shop6888.com/#/goods/goodsManagement"
-des = "过滤点击"
+des = "添加库存序号"
 
 popup_html = r"""↓↓↓↓↓↓↓ popup.html ↓↓↓↓↓↓↓
 <span class="a" target="_blank" id="{}">{}</span>|
