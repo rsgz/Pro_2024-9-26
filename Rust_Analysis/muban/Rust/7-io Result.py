@@ -1,3 +1,9 @@
+r'''
+就我看到的 io::Result 写法有很多：
+std::io::Result<()>
+
+'''
+
 
 
 s = f"""
