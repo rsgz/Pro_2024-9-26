@@ -3,6 +3,13 @@
 */
 
 // js字符串包含
+function find_ele(where,text){
+    // return Array.from(document.querySelectorAll('div.el-form-item__content button')).filter(v => v.textContent.includes('添加'))[0];
+    return Array.from(document.querySelectorAll(where)).filter(v => v.textContent.includes(text))[0];
+}
+
+
+// js字符串包含
 function findElementsContainingText(yuansu,text) {
     // 选择文档中的所有元素
     const allElements = document.querySelectorAll(yuansu);
