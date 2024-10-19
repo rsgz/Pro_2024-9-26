@@ -1,0 +1,51 @@
+#![allow(unused_imports)]
+#![allow(path_statements)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+#![allow(unused_must_use)]
+
+use std::path::PathBuf;  // 拼接路径
+use std::fs;  // 获取目录
+// use std::io;
+use std::collections::HashSet;  // 去重
+// 写数据
+use std::fs::OpenOptions;
+use std::io::Write;
+// 读数据
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
+use std::path::Path;
+
+use std::collections::HashMap;
+
+fn categorize_and_replace(items: Vec<&str>) -> HashMap<String, Vec<String>> {
+    let mut categorized_map = HashMap::new();
+    let mut replacements = HashMap::new();
+    replacements.insert("apple".to_string(), "fruit".to_string());
+    replacements.insert("banana".to_string(), "fruit".to_string());
+
+    for item in items {
+        // 获取替换词，如果不存在则使用原词
+        let category = replacements.get(item).cloned().unwrap_or_else(|| item.to_string());
+        // 将项添加到对应分类的向量中
+        categorized_map.entry(category).or_insert_with(Vec::new).push(item.to_string());
+    }
+
+    categorized_map
+}
+
+fn main() {
+    let items = vec!["apple", "banana", "carrot", "apple"];
+    let categorized_items = categorize_and_replace(items);
+
+    // 打印分类后的结果
+    for (category, items) in &categorized_items {
+        println!("{}: {:?}", category, items);
+    }
+}
+
+
+/*
+carrot: ["carrot"]
+fruit: ["apple", "banana", "apple"]
+*/
