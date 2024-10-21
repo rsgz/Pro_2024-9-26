@@ -1,3 +1,9 @@
+
+
+# 探索
+
+
+
 ### 有没有什么书籍文档 教你 怎么自研 前端框架？
 
 自研前端框架是一个挑战性的任务，需要深入理解前端技术、设计模式和框架架构。以下是一些书籍和资源，它们可以帮助你学习如何从头开始构建前端框架：
@@ -373,3 +379,168 @@ Rust 是一种系统编程语言，它以内存安全、高并发和零成本抽
 ```
 之所以选择rust 主要是python 太慢了。执行效率太低了一点
 ```
+
+# 项目
+
+## 悬浮框快捷键
+
+Tauri 是一个使用 Web 技术构建桌面应用程序的框架。以下是一个基本的步骤指南，帮助您在 Tauri 中创建一个悬浮框，并在其中放置两个按钮：
+1. **初始化 Tauri 项目**（如果您还没有项目的话）：
+   
+   ```sh
+   npm create tauri-app
+   ```
+2. **进入项目目录**：
+   ```sh
+   cd your-tauri-project
+   ```
+3. **编辑前端代码**。在 `src-tauri/src/main.rs` 中设置窗口无边框，并始终置于顶层，然后在 `src/index.html` 中添加悬浮框和按钮。
+**src-tauri/src/main.rs**:
+```rust
+use tauri::{CustomMenuItem, Menu, Submenu, WindowBuilder};
+fn main() {
+    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
+    let submenu = Submenu::new("File", Menu::new().add_item(quit));
+    let menu = Menu::new().add_submenu(submenu);
+    tauri::Builder::default()
+        .menu(menu)
+        .on_menu_event(|event| {
+            match event.menu_item_id() {
+                "quit" => {
+                    std::process::exit(0);
+                }
+                _ => {}
+            }
+        })
+        .setup(|app| {
+            let main_window = app.get_window("main").unwrap();
+            main_window.set_always_on_top(true).unwrap();
+            main_window.set_decorations(false).unwrap();
+            Ok(())
+        })
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
+}
+```
+**src/index.html**:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float Window</title>
+    <style>
+        #float-window {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background-color: white;
+            border: 1px solid black;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            user-select: none;
+            -webkit-app-region: drag;
+        }
+        button {
+            -webkit-app-region: no-drag;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="float-window">
+        <button id="btn1">Button 1</button>
+        <button id="btn2">Button 2</button>
+    </div>
+    <script>
+        // 这里可以添加按钮的事件处理逻辑
+        document.getElementById('btn1').addEventListener('click', () => {
+            alert('Button 1 clicked');
+        });
+        document.getElementById('btn2').addEventListener('click', () => {
+            alert('Button 2 clicked');
+        });
+    </script>
+</body>
+</html>
+```
+4. **运行项目**：
+   ```sh
+   npm run tauri:dev
+   ```
+这样，您应该能看到一个悬浮框，其中包含两个按钮。您可以拖动悬浮框，并且点击按钮会有相应的弹窗提示。请注意，这个示例中的悬浮框位置是固定的，如果您想要实现更复杂的拖动效果，可能需要添加额外的 JavaScript 代码来处理拖动事件。
+   
+   
+
+## 问题
+
+### Tauri会不会是嵌入一个谷歌浏览器内核解析？
+
+Tauri 是一个使用 Web 技术构建桌面应用程序的框架
+
+Tauri 不是嵌入一个完整的谷歌浏览器内核。相反，Tauri 使用了 Webview，这是一个轻量级的网页渲染组件，它是操作系统提供的 Web 视图组件的封装，而不是一个完整的浏览器。
+在 Windows 上，Tauri 默认使用 Microsoft Edge (Chromium) 的 WebView2，这是微软基于 Chromium 的新 Edge 浏览器的一部分。在 macOS 上，Tauri 使用 WebKit，这是苹果 Safari 浏览器的引擎。在 Linux 上，Tauri 可以使用多种不同的 Webview 实现，例如 WebKitGTK 或 QtWebEngine。
+因此，Tauri 提供了一个轻量级的、操作系统原生集成的 Web 渲染环境，而不是嵌入一个完整的浏览器内核。这使得 Tauri 应用程序比 Electron 等框架构建的应用程序更轻量，因为 Electron 使用了完整的 Chromium 浏览器来渲染应用程序的用户界面。
+
+
+
+### Tauri 项目为什么需要npm?直接cargo run 不行吗？
+
+Tauri 是一个使用 Rust 编写后端，并使用 Web 技术构建前端的应用程序框架。它旨在创建轻量级的桌面应用程序。以下是为什么 Tauri 项目需要 npm 的几个原因：
+1. **前端资产管理**：Tauri 的前端通常是用 HTML、CSS 和 JavaScript 编写的，这些资源需要被管理。npm（Node Package Manager）是 JavaScript 世界的包管理工具，用于安装、管理和共享前端代码库。
+2. **依赖管理**：现代前端开发涉及许多第三方库和框架，npm 用来管理这些依赖。例如，如果你的前端使用 React、Vue 或 Angular，npm 将用于安装这些框架及其相关的依赖。
+3. **构建工具链**：Tauri 应用可能需要构建步骤，比如编译 TypeScript、打包和缩小资源等。这些任务通常是通过 npm 脚本或像 Webpack、Rollup 这样的工具来完成的。
+4. **开发服务器**：在开发过程中，你可能会使用像 `webpack-dev-server` 这样的工具来提供热重载功能，这在 npm 脚本中配置。
+5. **插件和预配置**：Tauri 提供了一系列插件，这些插件可能需要通过 npm 安装或配置。
+虽然 `cargo run` 可以用来运行 Rust 后端，但是它不处理前端资源的构建和打包。以下是使用 `cargo` 和 `npm` 的一般流程：
+- 使用 `npm install` 安装前端依赖。
+- 使用 `npm run build` 构建前端资源。
+- 使用 `cargo build` 或 `cargo run` 构建和运行 Rust 后端。
+简而言之，`cargo` 管理 Rust 代码，而 `npm` 管理前端代码。两者在现代的 Tauri 应用开发流程中都是必不可少的。
+
+
+
+
+
+### 纯npm项目 是不是使用的完整的谷歌内核渲染？
+
+纯 npm 项目，如果是指使用 Node.js 作为服务器端运行环境的 Web 应用程序，通常不会直接使用谷歌内核（Chromeium）进行渲染。Node.js 本身是一个服务器端的 JavaScript 运行环境，它不包含浏览器引擎或渲染引擎。以下是关于纯 npm 项目的一些澄清：
+1. **服务器端渲染（SSR）**：如果 npm 项目使用服务器端渲染，比如使用 Next.js、Nuxt.js 或其他类似框架，那么渲染是在服务器上使用 Node.js 进行的。这种情况下，渲染通常是通过 Node.js 中的虚拟 DOM 来实现的，而不是使用浏览器内核。
+2. **客户端渲染**：如果 npm 项目是客户端渲染的 Web 应用程序，如使用 React、Vue 或 Angular 等，那么最终渲染是在用户的浏览器中完成的。用户的浏览器决定了使用哪个渲染引擎，如果用户使用的是 Chrome 浏览器，那么渲染将使用 Chromeium 内核。
+3. **Electron 或其他桌面框架**：如果你是在谈论使用 Electron 的 npm 项目，Electron 允许你使用 Web 技术构建桌面应用程序，并且它确实包含了 Chromeium 内核。在这种情况下，Electron 应用程序会使用 Chromeium 来渲染界面。
+4. **无头浏览器**：在服务器端，有时会使用无头浏览器（如 Puppeteer 或 Selenium）来执行自动化任务或进行渲染。这些无头浏览器通常会包含 Chromeium 内核，但它们并不代表 npm 项目的标准做法。
+总结来说，纯 npm 项目不直接使用谷歌内核进行渲染。服务器端的 Node.js 应用程序通常不涉及浏览器内核，而客户端的 JavaScript 应用程序则依赖于用户浏览器的渲染引擎。只有在特定的桌面应用程序框架（如 Electron）中，npm 项目才会直接与 Chromeium 内核交互。
+
+
+
+### druid和tauri比较 这两个谁更加的强大
+
+Druid 和 Tauri 是两个用于构建跨平台桌面应用程序的工具，但它们的侧重点和设计理念有所不同。以下是对两者的比较：
+### Druid
+Druid 是一个 Rust 写的 GUI 工具包，它旨在创建流畅、响应式的跨平台桌面应用程序。以下是 Druid 的一些特点：
+- **编程语言**：Druid 完全用 Rust 编写。
+- **GUI 库**：它提供了一个 Rust GUI 库，用于构建应用程序的用户界面。
+- **跨平台**：支持 Windows、macOS 和 Linux。
+- **定制性**：Druid 允许开发者有更多的自由来设计应用程序的界面和交互。
+- **轻量级**：Druid 旨在创建轻量级的应用程序，不依赖于 Web 技术或浏览器引擎。
+### Tauri
+Tauri 是一个框架，用于创建轻量级的跨平台桌面应用程序，它结合了 Rust 和 Web 技术的优势。以下是 Tauri 的一些特点：
+- **编程语言**：Tauri 的后端是用 Rust 编写的，前端可以使用 HTML、CSS 和 JavaScript。
+- **跨平台**：同样支持 Windows、macOS 和 Linux。
+- **Web 技术**：它利用 Web 技术来构建用户界面，但不同于 Electron，Tauri 不捆绑整个浏览器引擎，而是使用系统提供的 Webview。
+- **安全性**：Tauri 设计上注重安全，默认情况下限制了应用程序的权限。
+- **性能**：由于不捆绑整个浏览器引擎，Tauri 的应用程序启动速度和内存占用都比 Electron 应用程序要小。
+### 强大与否
+"强大"这个词语比较主观，取决于你的具体需求和优先级。以下是几个方面的比较：
+- **性能**：Tauri 通常被认为在性能上更强大，因为它不捆绑整个浏览器引擎，启动速度和内存占用都更小。
+- **开发效率**：如果你熟悉 Web 技术，Tauri 可能更强大，因为它允许你使用熟悉的 HTML、CSS 和 JavaScript 来构建界面。
+- **定制性和控制**：Druid 在 GUI 定制性上可能更强大，因为它是一个原生 GUI 库，提供了更多的控制权。
+- **安全性**：Tauri 在设计上考虑了安全性，提供了细粒度的权限控制。
+最终，选择哪个工具取决于你的项目需求、团队技能和应用程序的具体目标。如果你需要高性能且对 Web 技术有深入了解，Tauri 可能是更好的选择。如果你需要更细粒度的 GUI 控制和定制，Druid 可能更适合你的项目。
+
+
+
+
+
