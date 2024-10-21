@@ -1,0 +1,90 @@
+#![allow(unused_imports)]
+#![allow(path_statements)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+#![allow(unused_must_use)]
+
+use std::path::PathBuf;  // 拼接路径
+use std::fs;  // 获取目录
+// use std::io;
+use std::collections::HashSet;  // 去重
+// 写数据
+use std::fs::OpenOptions;
+use std::io::Write;
+// 读数据
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
+use std::path::Path;
+// 键值对
+use std::collections::HashMap;
+
+// 定义词性标签
+
+/*
+https://www.filepicker.io/api/file/BX9fr87TTu3wtPRRbVLQ
+https://github.com/thunlp/THULAC-Python
+https://github.com/ibeatai/beat-ai
+*/
+#[derive(Debug, PartialEq, Clone)]
+enum PosTag {
+    1,//代词, // 某 各自 彼此
+    2,//数词, // 小数 3.1415926 分数 百分数 序数词
+    3,//量词, // ⽚、册、滴、顶、项、克、吨、幅、根、节、颗、粒、批、匹、阵、⽀      ⼀颗⼼、⼀首歌。 ⼀⽚云、⼀册书
+    4,//数量词,
+    5,//动词, // 吵架、划船、离婚
+    6,//固定短语, // 不得了    ⽤于⼝语，表示情况很严重，没办法收拾
+    7,//连词,   // 总之
+    8,//介词,      // 顺（着）   沿着 朝前⾛ 自  自从  凭 对于  至于
+    9,//名词,
+    10,//地名,
+    11,//人名,
+    12,//叹词,
+    13,//拟声词,
+    14,//形容词,
+    15,//副词,
+    16,//时间词,
+    17,//方位词,
+    18,//简称,
+    19,//助词,
+    20,//语气助词,
+    21,//标点,
+    0,//Unknown,      // 未知
+}
+
+
+// 词汇表：将单词映射到词性标签
+fn get_lexicon() -> std::collections::HashMap<String, PosTag> {
+    let mut lexicon = std::collections::HashMap::new();
+    lexicon.insert("新建".to_string(), PosTag::Verb);
+    lexicon.insert("一个".to_string(), PosTag::Article);
+    lexicon.insert("结构体".to_string(), PosTag::Noun);
+
+    lexicon.insert("lazy".to_string(), PosTag::Adjective);
+    lexicon.insert("on".to_string(), PosTag::Preposition);
+    lexicon.insert("the".to_string(), PosTag::Determiner); // 现在添加了Determiner
+    // 添加更多单词和标签...
+    lexicon
+}
+
+// 分析句子并标记词性
+fn pos_tag(sentence: &str) -> Vec<(String, PosTag)> {
+    let lexicon = get_lexicon();
+    let words: Vec<&str> = sentence.split_whitespace().collect();
+    let mut tagged_words = Vec::new();
+
+    for word in words {
+        // 使用词汇表查找词性，如果没有找到，则标记为Unknown
+        let tag = lexicon.get(word).cloned().unwrap_or(PosTag::Unknown); // 使用 cloned() 来克隆值
+        tagged_words.push((word.to_string(), tag));
+    }
+
+    tagged_words
+}
+
+fn main() {
+    let sentence = "新建 一个 结构体";
+    let tagged_sentence = pos_tag(sentence);
+    for (word, tag) in tagged_sentence {
+        println!("{} - {:?}", word, tag);
+    }
+}

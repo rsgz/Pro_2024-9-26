@@ -1,0 +1,184 @@
+#![allow(unused_imports)]
+#![allow(path_statements)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+#![allow(unused_must_use)]
+
+use std::path::PathBuf;  // 拼接路径
+use std::fs;  // 获取目录
+// use std::io;
+use std::collections::HashSet;  // 去重
+// 写数据
+use std::fs::OpenOptions;
+use std::io::Write;
+// 读数据
+use std::fs::File;
+use std::io::{self, BufRead, BufReader};
+use std::path::Path;
+// 键值对
+use std::collections::HashMap;
+
+// 定义词性标签
+
+/*
+https://www.filepicker.io/api/file/BX9fr87TTu3wtPRRbVLQ
+https://github.com/thunlp/THULAC-Python
+https://github.com/ibeatai/beat-ai
+1 手动分隔
+2 同义词替换  新建,建立,创建-->新建
+3 满足特征链 就返回
+*/
+
+// 定义了 很多词性
+#[derive(Debug, PartialEq, Clone)]
+enum PosTag {
+    0,//Unknown,      // 未知
+    1,//代词, // 某 各自 彼此
+    2,//数词, // 小数 3.1415926 分数 百分数 序数词
+    3,//量词, // ⽚、册、滴、顶、项、克、吨、幅、根、节、颗、粒、批、匹、阵、⽀      ⼀颗⼼、⼀首歌。 ⼀⽚云、⼀册书
+    4,//数量词,
+    5,//动词, // 吵架、划船、离婚
+    6,//固定短语, // 不得了    ⽤于⼝语 表示情况很严重 没办法收拾
+    7,//连词,   // 总之
+    8,//介词,      // 顺（着）   沿着 朝前⾛ 自  自从  凭 对于  至于
+    9,//名词,
+    10,//地名,
+    11,//人名,
+    12,//叹词,
+    13,//拟声词,
+    14,//形容词,
+    15,//副词,
+    16,//时间词,
+    17,//方位词,
+    18,//简称,
+    19,//助词,
+    20,//语气助词,
+    21,//标点,
+}
+
+// 动词枚举
+enum Verb {
+    运行,
+    打包,
+    转换,
+    新建,
+    创建,
+    建立,
+    删除,
+    清除,
+    添加,
+    插入,
+    追加,
+    运用,
+    输入,
+    输出,
+    排除,
+    过滤,
+    搜索,
+    释放,
+    格式化,
+    看到,
+    编译,
+    解释,
+    调用,
+    // 可以继续添加其他动词
+}
+
+// 名词枚举
+enum Noun {
+    概括,
+    理解,
+    描述,
+    数量,
+    重量,
+    角度,
+    高度,
+    宽度,
+    长度,
+    尺寸,
+    屏幕,
+    电源,
+    代码,
+    目录,
+    项目,
+    函数,
+    模块,
+    应用,
+    程序,
+    变量,
+    类型,
+    所有权,
+    借用,
+    模式,
+    泛型,
+    特征,
+    对象,
+    集合,
+    数组,
+    列表,
+    键值对,
+    格式,
+    包,
+    文件,
+    功能,
+    方法,
+    环境变量,
+    迭代器,
+    文档,
+    生命周期,
+    返回值,
+    闭包,
+    枚举,
+    结构体,
+    解引用,
+    多线程,
+    多进程,
+    服务器,
+    表达式,
+    运算符,
+    条件,
+    整数,
+    字面值,
+    加法,
+    减法,
+    乘法,
+    除法,
+    浮点数,
+    小数,
+    有理数,
+    复数,
+    布尔值,
+    字符串,
+    字节,
+    子串,
+    路径,
+
+    // 可以继续添加其他名词
+}
+
+// 数量词枚举
+enum Quantifier {
+    一个,
+    一次,
+    一遍,
+    // 可以继续添加其他数量词
+}
+
+// 是否包含特征
+fn check_keywords(input: &str) -> Option<String> {
+    let keywords = ["新建", "项目"];
+    for keyword in &keywords {
+        if !input.contains(keyword) {
+            return None;
+        }
+    }
+    Some("cargo new".to_string())
+}
+
+fn main() {
+    let input = "新建一个项目时间管理器";
+    let result = check_keywords(&input);
+    println!("结果是: {}", result.unwrap_or("关键字不匹配".to_string()));
+}
+
+

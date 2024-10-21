@@ -97,6 +97,7 @@ fn get_pos_tags2(sentence: &str) -> Vec<(&str, &str)> {
     vec![("1","2")]
 }
 
+// 
 
 // 寻找动词后面的名词
 fn find_nouns_after_verbs(sentence: &str) -> Vec<String> {
@@ -146,7 +147,7 @@ fn selection_logic(sentence: &str, rules: &[&str]) -> Vec<String> {
     }
     actions
 }
-
+    
 
 fn main() ->std::io::Result<()>{
     let sentence = "新建 项目 Pro";

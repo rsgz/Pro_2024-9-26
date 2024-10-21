@@ -19,6 +19,7 @@ use std::path::Path;
 // 键值对
 use std::collections::HashMap;
 
+// 定义词性标签
 
 /*
 https://www.filepicker.io/api/file/BX9fr87TTu3wtPRRbVLQ
@@ -63,9 +64,7 @@ fn get_lexicon() -> std::collections::HashMap<String, PosTag> {
     lexicon.insert("新建".to_string(), PosTag::Verb);
     lexicon.insert("一个".to_string(), PosTag::NumQuant);
     lexicon.insert("结构体".to_string(), PosTag::Noun);
-    lexicon.insert("Pro".to_string(), PosTag::Noun);
-    lexicon.insert("编译".to_string(), PosTag::Verb);
-    lexicon.insert("运行".to_string(), PosTag::Verb);
+
     lexicon
 }
 
@@ -97,7 +96,6 @@ fn get_pos_tags2(sentence: &str) -> Vec<(&str, &str)> {
     vec![("1","2")]
 }
 
-
 // 寻找动词后面的名词
 fn find_nouns_after_verbs(sentence: &str) -> Vec<String> {
     let pos_tags = get_pos_tags(sentence);
@@ -120,64 +118,16 @@ fn find_nouns_after_verbs(sentence: &str) -> Vec<String> {
     nouns_after_verbs
 }
 
-
-// 选择逻辑 特征检测
-fn selection_logic(sentence: &str, rules: &[&str]) -> Vec<String> {
-    let mut actions = Vec::new();
-
-    for guize in rules {
-        let parts: Vec<&str> = guize.split("-->").collect();
-        if parts.len() != 2 {
-            continue; // 跳过格式不正确的规则
-        }
-        let conditions: Vec<&str> = parts[0].split(',').collect();
-
-        let mut all_conditions_met = true;
-        for g in &conditions {
-            if !sentence.contains(g) {
-                all_conditions_met = false;
-                break;
-            }
-        }
-
-        if all_conditions_met {
-            actions.push(parts[1].to_string());
-        }
-    }
-    actions
+fn main() {
+    let sentence = "新建 一个 结构体";
+    let nouns = find_nouns_after_verbs(sentence);
+    println!("动词后面的名词: {:?}", nouns);
 }
 
-
-fn main() ->std::io::Result<()>{
-    let sentence = "新建 项目 Pro";
-    let zhujue = find_nouns_after_verbs(sentence);
-
-    println!("{:?}", zhujue);
-    // 确保zhujue不为空，如果为空，则赋予默认值
-    let zhujue = if zhujue.is_empty() {
-        vec!["xxx".to_string()]
-    } else {
-        zhujue
-    };
-
-    let rule = format!("新建,项目-->cargo new {}", zhujue[0]);
-    let rules = [
-        "编译,运行-->cargo run --release",
-        &format!("新建,项目-->cargo new {}", zhujue[0]),
-        // 可以在这里添加更多的规则
-    ];
-
-    let s = selection_logic(sentence,&rules);
-    println!("{:?}", s[0]);
-    Ok(())
-}
 
 /*
+"新建",Verb
 "一个",NumQuant
-"项目",Unknown
-"Pro",Noun
-"cargo new Pro"
-
-把我的函数逻辑拆分一下
-我想规则 肯定不止一条，那么 可以将规则 写成集合 带入到 selection_logic遍历，如果 sentence 符合其中的模式 都输出
+"结构体",Noun
+动词后面的名词: ["结构体"]
 */
