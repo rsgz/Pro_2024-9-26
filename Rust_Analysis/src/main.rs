@@ -1,6 +1,8 @@
 #![allow(unused_variables)]
 #![allow(unused_mut)]  // warning: variable does not need to be mutable
-#![allow(unused_assignments)]  // 
+#![allow(unused_assignments)]
+#![allow(unused_imports)]  // warning: unused import: `std::i8`
+
 /*
 #![allow(unused_imports)]
 #![allow(path_statements)]
@@ -63,8 +65,6 @@ enum PosTag {
 
  */
 fn main() {
-    // 适合不同变量 类型
-    let numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
-    let squares: std::slice::Iter<'_, i32> = numbers.iter();
-    println!("{:?}",spaces);
+    let (a, c) = ("hi", false);
+    println!("{}",a);
 }

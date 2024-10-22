@@ -1,28 +1,97 @@
-r"""
+报错 = r"""
+error[E0716]: temporary value dropped while borrowed
+let s: &str = usize_data.to_string().as_str();
+to_string()创建的 string 对象是一个临时值 必须掷定新变量 延长生命周期
+
+修复1： 利用mut 可变性 (需要同类型)
+    let mut ss: &str = "";
+    let usize_data:usize= 100;
+    let s: String = usize_data.to_string();
+    ss = s.as_str();  // "100"
+    println!("{:?}",ss);
+
+修复2： 利用let 变量遮蔽 (可以不同数据类型)
+    let ss: &str = "";
+    let usize_data:usize= 100;
+    let s: String = usize_data.to_string();
+    let ss = s.as_str();  // "100"
+    println!("{:?}",ss);
+
+"""
+
+
+&str = r"""
+=========================== &str--> =========================== 
 &str-->&str
 let spaces = "  100 ";
 let spaces = spaces.trim();
-
-
-&str-->usize
-spaces2.len()
 
 &str-->String
 let spaces = " bbb 100 a";
 let spaces = spaces.to_uppercase();
 
+&str-->数字
+let s:i32 = "42".parse().expect("解析错了");
+let s:i32 = "42".parse::<i32>().unwrap();
 
-
-usize-->String
-let temp: String = spaces2.len().to_string();
-
-String-->&str
-spaces2 = temp.as_str();
+&str-->usize
+spaces2.len()
 
 &str-->迭代器
 let data = "  Yellow-eyed penguin,65  ";
 let fields: Vec<_> = data.split(',')
+"""
 
+char = r"""
+=========================== char--> ===========================
+char-->u8
+let c: u8 = 'a' as u8; // 将字符'a'转换为整数，97
+
+"""
+
+
+u16 = r"""
+u16-->u8      超过范围就会报错
+let a: u8 = 10;
+let b: u16 = 15;
+let b2: u8 = b.try_into().unwrap();
+
+
+"""
+
+usize = r"""
+=========================== usize--> ===========================
+usize-->String
+let temp: String = spaces2.len().to_string();
+"""
+
+i8 = r"""
+=========================== i8--> ===========================
+i8-->i32
+let b: i32 = 100_i8 as i32;  // 100
+
+"""
+
+f32= r"""
+=========================== f32--> ===========================
+f32-->
+let y: f32 = 3.0; // f32
+"""
+
+f64 = r"""
+=========================== f64--> ===========================
+f64-->i8
+let a = 3.1 as i8;  // 3
+"""
+
+String= r"""
+=========================== String--> ===========================
+String-->&str
+spaces2 = temp.as_str();
+"""
+
+迭代器 = r"""
+=========================== 迭代器--> ===========================
 迭代器-->迭代器适配器-->迭代器
 map 是一个迭代器适配器方法,会返回一个新的迭代器
 let data = "  Yellow-eyed penguin,65  ";
@@ -38,14 +107,39 @@ for_each
 迭代器-->数组
 collect() 将迭代器转化成 数组
 data.split(',').map(|field| field.trim()).collect();
+"""
 
+数组 = r"""
+=========================== 数组--> ===========================
 数组-->迭代器
 enumerate() 方法返回一个迭代器
 for (i, record) in records.enumerate()
 或者
 let numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
 let squares: std::slice::Iter<'_, i32> = numbers.iter();
+"""
 
+NaN = r"""
+=========================== -->NaN ===========================
+判断一个数值是否是 NaN
+let x = (-42.0_f32).sqrt();
+if x.is_nan() {
+    println!("未定义的数学行为")
+}
+"""
+
+内存地址 = r"""
+内存地址-->指针
+https://course.rs/advance/into-types/converse.html
+
+"""
+
+函数 = r"""
+fn add_with_extra(x: i32, y: i32) -> i32 {}
+
+"""
+
+笔记 = r"""
 基本数据类型
 布尔类型（Boolean）  bool: 可以是 true 或 false。
 字符类型（Character）  char: 表示一个 Unicode 标量值，如 ‘a’、‘α’ 和 ‘∞’。
