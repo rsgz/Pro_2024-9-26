@@ -12,30 +12,15 @@ def quchu_shouhang(s):
     return new_text
 
 s = r"""
-pub trait Summary {
-    fn summarize_author(&self) -> String;
-
-    fn summarize(&self) -> String {
-        format!("(Read more from {}...)", self.summarize_author())
-    }
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+    let numbers2: Vec<_> = numbers.iter().map(|num| {
+        let v = num*100;
+        let name = format!("niubi_{}",num);  // 构建字符串
+        (num,v)
+    }).collect();
+    print!("{:?}",numbers2);  // [(1, 100), (2, 200), (3, 300), (4, 400), (5, 500)]
 }
-
-impl Summary for Tweet {
-    fn summarize_author(&self) -> String {
-        format!("@{}", self.username)
-    }
-}
-
-let tweet = Tweet {
-    username: String::from("horse_ebooks"),
-    content: String::from(
-        "of course, as you probably already know, people",
-    ),
-    reply: false,
-    retweet: false,
-};
-println!("1 new tweet: {}", tweet.summarize());
-
 """
 start = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码生成 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"
 end = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码结束 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"

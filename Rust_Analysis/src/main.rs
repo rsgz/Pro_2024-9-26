@@ -1,6 +1,8 @@
+#![allow(unused_variables)]  // warning: unused variable: `fields`
+/*
 #![allow(unused_imports)]
 #![allow(path_statements)]
-#![allow(unused_variables)]
+
 #![allow(unused_mut)]
 #![allow(unused_must_use)]
 #![allow(dead_code)]
@@ -57,127 +59,13 @@ enum PosTag {
     Unknown,    // 未知
 }
 
-// 词汇表：将单词映射到词性标签
-fn get_lexicon() -> std::collections::HashMap<String, PosTag> {
-    let mut lexicon = std::collections::HashMap::new();
-    lexicon.insert("新建".to_string(), PosTag::Verb);
-    lexicon.insert("一个".to_string(), PosTag::NumQuant);
-    lexicon.insert("结构体".to_string(), PosTag::Noun);
-    lexicon.insert("Pro".to_string(), PosTag::Noun);
-    lexicon.insert("编译".to_string(), PosTag::Verb);
-    lexicon.insert("运行".to_string(), PosTag::Verb);
-    lexicon
+ */
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+    let numbers2: Vec<_> = numbers.iter().map(|num| {
+        let v = num*100;
+        let name = format!("niubi_{}",num);  // 构建字符串
+        (num,v)
+    }).collect();
+    print!("{:?}",numbers2);  // [(1, 100), (2, 200), (3, 300), (4, 400), (5, 500)]
 }
-
-
-// 分析句子并标记词性
-fn get_pos_tags(sentence: &str) -> Vec<(String, PosTag)> {
-    let lexicon = get_lexicon();
-    let words: Vec<&str> = sentence.split_whitespace().collect();
-    let mut tagged_words = Vec::new();
-
-    for word in words {
-        // 使用词汇表查找词性，如果没有找到，则标记为Unknown
-        let tag = lexicon.get(word).cloned().unwrap_or(PosTag::Unknown); // 使用 cloned() 来克隆值
-        tagged_words.push((word.to_string(), tag));
-    }
-    tagged_words
-}
-
-
-// 假设的词性标注
-fn get_pos_tags2(sentence: &str) -> Vec<(&str, &str)> {
-    // 这里应该是调用真实的词性标注器，我们假设返回每个单词及其标签
-    // vec![
-    //     ("新建", PosTag::Verb),
-    //     ("一个", PosTag::NumQuant),
-    //     ("结构体", PosTag::Noun),
-    //     // ... 其他单词和标签
-    // ]
-    vec![("1","2")]
-}
-
-
-// 寻找动词后面的名词
-fn find_nouns_after_verbs(sentence: &str) -> Vec<String> {
-    let pos_tags = get_pos_tags(sentence);
-    let mut nouns_after_verbs = Vec::new();
-    
-    // 使用一个标志来记录是否刚刚遇到了一个动词
-    let mut after_verb = false;
-    
-    for (word, tag) in pos_tags {
-        if after_verb && tag == PosTag::Noun {
-            nouns_after_verbs.push(word.to_string());
-        }
-        println!("{:?},{:?}", word,tag);
-        // after_verb = tag == "Verb";
-        if tag == PosTag::Verb{
-            after_verb=true;
-        }
-    }
-    
-    nouns_after_verbs
-}
-
-
-// 选择逻辑 特征检测
-fn selection_logic(sentence: &str, rules: &[&str]) -> Vec<String> {
-    let mut actions = Vec::new();
-
-    for guize in rules {
-        let parts: Vec<&str> = guize.split("-->").collect();
-        if parts.len() != 2 {
-            continue; // 跳过格式不正确的规则
-        }
-        let conditions: Vec<&str> = parts[0].split(',').collect();
-
-        let mut all_conditions_met = true;
-        for g in &conditions {
-            if !sentence.contains(g) {
-                all_conditions_met = false;
-                break;
-            }
-        }
-
-        if all_conditions_met {
-            actions.push(parts[1].to_string());
-        }
-    }
-    actions
-}
-
-
-fn main() ->std::io::Result<()>{
-    let sentence = "新建 项目 Pro";
-    let zhujue = find_nouns_after_verbs(sentence);
-
-    println!("{:?}", zhujue);
-    // 确保zhujue不为空，如果为空，则赋予默认值
-    let zhujue = if zhujue.is_empty() {
-        vec!["xxx".to_string()]
-    } else {
-        zhujue
-    };
-
-    let rule = format!("新建,项目-->cargo new {}", zhujue[0]);
-    let rules = [
-        "编译,运行-->cargo run --release",
-        &format!("新建,项目-->cargo new {}", zhujue[0]),
-        // 可以在这里添加更多的规则
-    ];
-
-    let s = selection_logic(sentence,&rules);
-    println!("{:?}", s[0]);
-    Ok(())
-}
-
-/*
-"一个",NumQuant
-"项目",Unknown
-"Pro",Noun
-"cargo new Pro"
-
-把我的函数逻辑拆分一下
-我想规则 肯定不止一条，那么 可以将规则 写成集合 带入到 selection_logic遍历，如果 sentence 符合其中的模式 都输出
-*/
