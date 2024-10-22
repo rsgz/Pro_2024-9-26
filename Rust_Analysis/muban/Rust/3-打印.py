@@ -5,7 +5,7 @@ print!("{{:?}}",{obj});
 print!("{{:#?}}",{obj});
 println!("{{:?}}",{obj});
 println!("{{:#?}}",{obj});
-
+println!("{{:?}} --> {{:?}}",{obj}, {obj});
 println!(">>>>>> {obj} ---> \\n{{:#?}}",{obj});
 
 dbg!({obj});

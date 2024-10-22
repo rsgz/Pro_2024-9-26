@@ -1,4 +1,51 @@
 r"""
+&str-->&str
+let spaces = "  100 ";
+let spaces = spaces.trim();
+
+
+&str-->usize
+spaces2.len()
+
+&str-->String
+let spaces = " bbb 100 a";
+let spaces = spaces.to_uppercase();
+
+
+
+usize-->String
+let temp: String = spaces2.len().to_string();
+
+String-->&str
+spaces2 = temp.as_str();
+
+&str-->迭代器
+let data = "  Yellow-eyed penguin,65  ";
+let fields: Vec<_> = data.split(',')
+
+迭代器-->迭代器适配器-->迭代器
+map 是一个迭代器适配器方法,会返回一个新的迭代器
+let data = "  Yellow-eyed penguin,65  ";
+let fields: Vec<_> = data.split(',').map(|field| field.trim())
+
+迭代器适配器
+map
+filter
+fold
+scan
+for_each
+
+迭代器-->数组
+collect() 将迭代器转化成 数组
+data.split(',').map(|field| field.trim()).collect();
+
+数组-->迭代器
+enumerate() 方法返回一个迭代器
+for (i, record) in records.enumerate()
+或者
+let numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
+let squares: std::slice::Iter<'_, i32> = numbers.iter();
+
 基本数据类型
 布尔类型（Boolean）  bool: 可以是 true 或 false。
 字符类型（Character）  char: 表示一个 Unicode 标量值，如 ‘a’、‘α’ 和 ‘∞’。

@@ -1,4 +1,6 @@
-#![allow(unused_variables)]  // warning: unused variable: `fields`
+#![allow(unused_variables)]
+#![allow(unused_mut)]  // warning: variable does not need to be mutable
+#![allow(unused_assignments)]  // 
 /*
 #![allow(unused_imports)]
 #![allow(path_statements)]
@@ -61,11 +63,8 @@ enum PosTag {
 
  */
 fn main() {
-    let numbers = vec![1, 2, 3, 4, 5];
-    let numbers2: Vec<_> = numbers.iter().map(|num| {
-        let v = num*100;
-        let name = format!("niubi_{}",num);  // 构建字符串
-        (num,v)
-    }).collect();
-    print!("{:?}",numbers2);  // [(1, 100), (2, 200), (3, 300), (4, 400), (5, 500)]
+    // 适合不同变量 类型
+    let numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
+    let squares: std::slice::Iter<'_, i32> = numbers.iter();
+    println!("{:?}",spaces);
 }
