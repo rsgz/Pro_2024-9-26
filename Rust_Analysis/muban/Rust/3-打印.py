@@ -1,4 +1,4 @@
-obj = "fields"  #
+obj = "text"  #
 
 sentence = f'''\
 print!("{{:?}}",{obj});

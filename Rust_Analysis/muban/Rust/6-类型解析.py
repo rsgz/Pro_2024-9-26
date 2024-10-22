@@ -88,6 +88,14 @@ String= r"""
 =========================== String--> ===========================
 String-->&str
 spaces2 = temp.as_str();
+或者
+let y: String = {{
+    let x: String = "33".to_string();
+    x // 返回 String 对象本身
+}};
+
+let y: &str = y.as_str();
+println!("{{}}", y); // 调用闭包并打印结果
 """
 
 迭代器 = r"""
@@ -136,6 +144,9 @@ https://course.rs/advance/into-types/converse.html
 
 函数 = r"""
 fn add_with_extra(x: i32, y: i32) -> i32 {}
+fn add(x:u32,y:u32) -> u32 {}
+fn plus_or_minus(x:i32) -> i32 {}
+fn clear(text: &mut String) -> () {}
 
 """
 

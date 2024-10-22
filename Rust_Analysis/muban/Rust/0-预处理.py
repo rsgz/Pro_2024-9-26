@@ -12,8 +12,11 @@ def quchu_shouhang(s):
     return new_text
 
 s = r"""
-let (a, c) = ("hi", false);
-println!("{}",a);
+fn main() {
+    let mut s = String::from("hello");
+    s.push_str(", world!"); // push_str() 在字符串后追加字面值
+    println!("{}", s); // 将打印 `hello, world!`
+}
 """
 start = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码生成 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"
 end = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码结束 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"

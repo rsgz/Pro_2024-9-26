@@ -2,6 +2,7 @@
 #![allow(unused_mut)]  // warning: variable does not need to be mutable
 #![allow(unused_assignments)]
 #![allow(unused_imports)]  // warning: unused import: `std::i8`
+#![allow(dead_code)]  // warning: fields `x` and `y` are never read
 
 /*
 #![allow(unused_imports)]
@@ -9,10 +10,12 @@
 
 #![allow(unused_mut)]
 #![allow(unused_must_use)]
-#![allow(dead_code)]
 
+use std::fmt::Debug;  // 结构体
 use std::path::PathBuf;  // 拼接路径
 use std::fs;  // 获取目录
+use std::collections::HashMap; // 键值对
+
 // use std::io;
 use std::collections::HashSet;  // 去重
 // 写数据
@@ -22,8 +25,8 @@ use std::io::Write;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::Path;
-// 键值对
-use std::collections::HashMap;
+
+
 
 
 /*
@@ -64,7 +67,10 @@ enum PosTag {
 }
 
  */
-fn main() {
-    let (a, c) = ("hi", false);
-    println!("{}",a);
-}
+
+
+ fn main() {
+    let mut s = String::from("hello");
+    s.push_str(", world!"); // push_str() 在字符串后追加字面值
+    println!("{}", s); // 将打印 `hello, world!`
+ }
