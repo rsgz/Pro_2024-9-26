@@ -1,5 +1,6 @@
 # Rust cargo metadata
 Cargo.lock
+**/.rustc_info.json
 
 # The target directory contains the compiled artifacts
 target/
