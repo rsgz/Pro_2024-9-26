@@ -12,14 +12,12 @@ def quchu_shouhang(s):
     return new_text
 
 s = r"""
-fn calculate_length(s: &String) -> usize {
-    s.len()
-}
-
 fn main() {
-    let s1 = String::from("hello");
-    let len = calculate_length(&s1);
-    println!("长度 '{}' is {}.", s1, len);
+    let mut s = String::from("Hello rust!");
+    s.insert(5, ',');
+    println!("插入字符 insert() -> {}", s);
+    s.insert_str(6, " I like");
+    println!("插入字符串 insert_str() -> {}", s);
 }
 """
 start = "﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀ 代码生成 ﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀﹀"

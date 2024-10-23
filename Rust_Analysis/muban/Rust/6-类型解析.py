@@ -29,6 +29,9 @@ let spaces = spaces.trim();
 &str-->String
 let spaces = " bbb 100 a";
 let spaces = spaces.to_uppercase();
+或者
+let s = String::from("hello,world!");
+let s = "hello,world".to_string()
 
 &str-->数字
 let s:i32 = "42".parse().expect("解析错了");
@@ -86,7 +89,8 @@ let a = 3.1 as i8;  // 3
 String= r"""
 =========================== String--> ===========================
 String-->&str
-spaces2 = temp.as_str();
+let temp =  "33".to_string();
+let spaces2 = temp.as_str();
 或者
 let y: String = {{
     let x: String = "33".to_string();
@@ -95,6 +99,29 @@ let y: String = {{
 
 let y: &str = y.as_str();
 println!("{{}}", y); // 调用闭包并打印结果
+或者
+let s = String::from("hello,world!");
+&s
+&s[..]
+s.as_str()
+
+"""
+
+&String=r"""
+=========================== &String--> ===========================
+&String-->&str
+sentence = f'''\
+fn main() {{
+    let mut s = String::from("hello world");
+    let word = first_word(&s);
+    // s.clear(); // error!
+    println!("the first word is: {{}}", word);
+}}
+fn first_word(s: &String) -> &str {{
+    &s[..1]
+}}
+'''
+print(sentence)
 """
 
 迭代器 = r"""
