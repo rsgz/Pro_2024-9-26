@@ -1,4 +1,4 @@
-obj = "s"  #
+obj = "m1"  #
 
 sentence = f'''\
 print!("{{:?}}",{obj});
