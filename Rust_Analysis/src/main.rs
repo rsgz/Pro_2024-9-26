@@ -67,36 +67,39 @@ enum PosTag {
 }
 */
 
-fn prin1<T>(x:T){
-    println!("{}",x);
-}
-
-#[derive(Debug)]
-enum Option<T> {
-    Some(T),
-    None,
-}
 
 
 
 fn main() {
-    let m1: Message = Message::Quit;
-    let m2: Message = Message::Move{x:1,y:1};
-    let m3: Message = Message::ChangeColor(255,255,0);
-    print!("{:#?}",m1);
-    print!("{:#?}",m2);
-    print!("{:#?}",m3);
-}
+    let text = "Rust 开发团队的意见又非常重视社区的意见";
+    let zi = "的意见";
 
-/*
-QuitMove {
-    x: 1,
-    y: 1,
+    // 使用 find 方法查找 pattern 在 text 中的位置 非常反直觉 那么使用chars()好一点 
+    let fu_list: Vec<char> = text.chars().collect();
+    print!("{:?}",fu_list);
+    let zi_list: Vec<char> = zi.chars().collect();
+    print!("{:?}",zi_list);
+
+    // 首次寻找  假设如果这个字符 只存在一次 那肯定是最左边
+    let mut weizhi_l: Vec<usize> = Vec::new();
+    let mut shou: bool=false;
+    for (i,v1) in fu_list.into_iter().enumerate(){
+        for (j,v2) in zi_list.clone().into_iter().enumerate(){
+            if v1==v2{
+                // 第一次 直接录入 索引
+                if weizhi_l.len()<1{
+                    weizhi_l.push(i);
+                }
+                // 第2-n次 直接录入 索引   
+                // 索引之间 间隔1 保证了 连续性 i-weizhi_l[weizhi_l.len()-1]==1
+                // 这个逻辑 获取了最左边的一次
+                if weizhi_l.len()>=1 && i-weizhi_l[weizhi_l.len()-1]==1{
+                    weizhi_l.push(i);
+                }
+                // println!(">>>>>> v2 ---> \n{:#?}",i);
+            }
+        }
+    }
+    // 
+    print!("{:?}",weizhi_l);
 }
-    
-ChangeColor(
-    255,
-    255,
-    0,
-)
-*/

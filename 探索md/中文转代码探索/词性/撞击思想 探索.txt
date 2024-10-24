@@ -1,0 +1,76 @@
+这个寻找的位置 并不是按照字符来的  很反直觉
+fn main() {
+    let text1 = "Rust 开发团队又非常重视社区的意见";
+    let text2 = "xx又非常重视xx的意见";
+    let text2_feiqi: Vec<_> = text2.split("xx").map(|field| field.trim()).filter(|field| !field.is_empty()).collect();  // ["又非常重视", "的意见"]
+    let geshu = text2_feiqi.len();
+    let weizhi_1 = text1.find(text2_feiqi[0]).unwrap();  // 17
+    print!("{:?}",weizhi_1);
+}
+
+失败的尝试
+fn main() {
+    let text = "Rust 开发团队又非常重视社区的意见";
+    let pattern = "又非常重视";
+
+    // 使用 find 方法查找 pattern 在 text 中的位置
+    let m=text.chars()
+
+    print!("{:#?}",m);
+
+    let len = text.len();
+    print!("{:#?}",len);
+}
+
+
+    let m = text.chars();
+    print!("{:#?}",m);
+Chars([
+    'R',
+    'u',
+    's',
+    't',
+    ' ',
+    '开',
+    '发',
+    '团',
+    '队',
+    '又',
+    '非',
+    '常',
+    '重',
+    '视',
+    '社',
+    '区',
+    '的',
+    '意',
+    '见',
+])
+
+
+let m = text.chars().enumerate();
+print!("{:#?}",m);
+Enumerate {
+    iter: Chars([
+        'R',
+        'u',
+        's',
+        't',
+        ' ',
+        '开',
+        '发',
+        '团',
+        '队',
+        '又',
+        '非',
+        '常',
+        '重',
+        '视',
+        '社',
+        '区',
+        '的',
+        '意',
+        '见',
+    ]),
+    count: 0,
+}
