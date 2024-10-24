@@ -1,0 +1,22 @@
+fn determine_sentence_type(sentence: &str) -> &'static str {
+    if sentence.starts_with("把") {
+        "把字句"
+    } else if sentence.starts_with("被") {
+        "被字句"
+    } else {
+        "其他句式"
+    }
+}
+
+fn main() {
+    let sentences = vec![
+        "把书放在桌子上",
+        "书被放在桌子上",
+        "我正在学习Rust",
+    ];
+
+    for sentence in sentences {
+        let sentence_type = determine_sentence_type(sentence);
+        println!("'{}' 是一个 {}.", sentence, sentence_type);
+    }
+}

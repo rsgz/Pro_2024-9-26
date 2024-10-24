@@ -1,0 +1,42 @@
+在Rust中，要判断句子结构，你需要进行句法分析。由于Rust标准库不包含自然语言处理（NLP）功能，你需要使用第三方库。目前Rust生态系统中有一些NLP库，但它们的成熟度和功能可能不如Python中的NLP库（如spaCy或NLTK）。
+以下是一个使用Rust进行句法分析的示例，我们将使用`lingua`库来检测句子中的语言，然后使用`rustling-ontology`来尝试进行一些基本的句法分析。请注意，`rustling-ontology`可能不包含完整的中文句法分析支持，但它可以用于演示基本的概念。
+首先，确保在你的`Cargo.toml`文件中添加了以下依赖：
+```toml
+[dependencies]
+lingua = "0.1"
+rustling-ontology = "0.3"
+```
+然后，你可以编写以下代码来尝试进行句法分析：
+```rust
+use lingua::{Language, LanguageDetectorBuilder};
+use rustling_ontology::{spanish, Ontology};
+use rustling_ontology::syntax::{parse as parse_syntax, Category};
+use rustling_ontology::syntax::es::cat::ES;
+fn main() {
+    let text = "El gato está en la caja.";
+    // Detect language
+    let language_detector = LanguageDetectorBuilder::from_languages(&[Language::Spanish]).build();
+    let detected_language = language_detector.detect_language_of(text).unwrap();
+    if detected_language == Language::Spanish {
+        // Spanish sentence, let's try to parse it
+        let ontology = Ontology::new(spanish::Ontology::default());
+        let result = parse_syntax(&ontology, text);
+        match result {
+            Ok(parsed) => {
+                for chunk in parsed.iter() {
+                    match chunk.category() {
+                        Category::Token(ES::Noun(_)) => println!("Found a noun: {}", chunk.fragment()),
+                        Category::Token(ES::Verb(_)) => println!("Found a verb: {}", chunk.fragment()),
+                        _ => println!("Found other category: {}", chunk.fragment()),
+                    }
+                }
+            },
+            Err(e) => println!("Error parsing sentence: {}", e),
+        }
+    } else {
+        println!("Language not supported or not detected.");
+    }
+}
+```
+在这个例子中，我们首先使用`lingua`库检测句子的语言，然后使用`rustling-ontology`库进行句法分析。由于`rustling-ontology`目前可能不支持中文，这里使用了西班牙语作为例子。
+对于中文句法分析，你可能需要寻找其他专门的库，或者使用外部服务（例如通过HTTP请求调用Python服务器）。目前Rust的NLP生态仍在发展中，因此可能需要一些额外的努力来找到适合中文的解决方案。如果你找到了支持中文的Rust NLP库，你可以用类似的方式使用它们来进行句法分析。

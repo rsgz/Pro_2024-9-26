@@ -186,6 +186,7 @@ fn add_with_extra(x: i32, y: i32) -> i32 {}
 fn add(x:u32,y:u32) -> u32 {}
 fn plus_or_minus(x:i32) -> i32 {}
 fn clear(text: &mut String) -> () {}
+fn plus_one(x: Option<i32>) -> Option<i32> {}
 
 """
 

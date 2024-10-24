@@ -65,7 +65,6 @@ enum PosTag {
     Punctuation,// 标点
     Unknown,    // 未知
 }
-
 */
 
 fn prin1<T>(x:T){
