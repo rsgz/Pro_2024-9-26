@@ -320,7 +320,8 @@ $(function(){
             // var title = "标题";
             // var description = "描述";
             var title = prompt()
-            var content = prompt()
+            // var content = prompt()
+            var content = title;  // 2024-10-30 修改一下  就是让标题和 content 内容一致 省得输入两次
             console.log("--->")
             chrome.tabs.sendMessage(tabs[0].id, {title: title, content: content,instruct:"add"});
             // chrome.runtime.sendMessage({title: title, description: description});

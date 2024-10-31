@@ -1,0 +1,26 @@
+发现一些好玩、有趣、酷炫的开源库
+一个 HTTP 客户端或 ProtoBuffer 编码库
+更新活跃
+想要寻找常用操作的代码片段
+用于熟悉 Rust 或者直接复制粘贴到自己的项目中
+文件操作、数据库操作、HTTP 请求、排序算法、正则等
+专属于软件开发工程师的 AI 入门圣经。从神经网络到大模型，从高层设计到微观原理，从工程实现到算法，学完后，你会发现 AI 也并不是想象中那么高不可攀、无法战胜，Just beat it !
+搭建 VSCode 所需的环境
+在 macOS、Linux、Windows 上安装 Rust 以及相关工具链
+简单介绍 Cargo
+打开终端并输入下面命令
+安装 C 语言编译器
+Rust 会依赖 libc 和链接器 linker
+需要再手动安装一个 C 语言编译器
+需要手动添加到环境变量中
+提示未安装 Microsoft C++ Build Tools
+请将 %MSYS 安装路径%\mingw64\bin 添加到系统变量 PATH 中
+要更新 Rust
+要卸载 Rust 和 rustup
+检查安装是否成功
+能看到最新发布的稳定版本的版本号、提交哈希值和提交日期
+安装 VSCode 的 Rust 插件
+用 Cargo 创建一个 Rust 项目，然后用 VSCode 打开
+一个好的包管理工具有多么的重要
+有两种方式可以运行项目 cargo run
+cargo build 编译

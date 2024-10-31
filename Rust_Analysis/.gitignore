@@ -14,3 +14,6 @@ target/
 **/Selendroid/
 **/tmp/
 **/temp/
+
+# 项目是一个程序应用 那么就 .gitignore不加 Cargo.lock
+# 是依赖 .gitignore 就要加上 Cargo.lock

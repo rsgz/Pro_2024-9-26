@@ -12,6 +12,25 @@ import win32api, win32con
 
 r'''
 pip install pyautogui -i https://mirrors.aliyun.com/pypi/simple
+pyautogui.click(x=p2[0], y=p2[1], duration=0.1)  # 点击
+pyautogui.moveTo(click_point[0], click_point[1])  # 移动
+pyautogui.hotkey('win', 'v')
+pyautogui.sleep(1)
+pyautogui.press('enter')
+pyautogui.press('space')
+pyautogui.press('down')
+pyautogui.typewrite("11111")
+pyautogui.typewrite()  # 避免使用
+pyautogui.click(100, 100)
+pyautogui.click(2352, 102)
+pyautogui.rightClick()
+pyautogui.press('enter')
+pyautogui.hotkey('alt', 'd')
+pyautogui.hotkey('ctrl', 'v', interval = 0.15)
+
+import pyperclip
+pyperclip.copy('sometext')
+pyperclip.paste()
 '''
 
 s = time.sleep
@@ -218,7 +237,6 @@ def find_pic_move_center(small, big, xiangsidu=0.98):
     # print(click_point,type(click_point))
     return click_point
 
-
 # 点击
 @timer
 def find_pic_click_center(small, big, xiangsidu=0.98, info=None):
@@ -263,6 +281,54 @@ def find_pic_click_center(small, big, xiangsidu=0.98, info=None):
     # print(click_point, type(click_point))
     return click_point
 
+# 找图且偏移
+@timer
+def find_pic_move_xy(small, big, pianliangxy,xiangsidu=0.98):
+    # from find_pic import find_pic_click_center_keep,gdiScreenCapture,find_pic_move_xy
+    # find_pic_move_xy(small=p(1), big=gdiScreenCapture(), pianliangxy=(92,-68),xiangsidu=0.90)
+    # print("find_pic_move_xy")
+    # 读入图片 big1.png是背景大图;  small.png是需要寻找的小图（格式.jpg .png都行）
+    if isinstance(big, numpy.ndarray):
+        print("图片数组")
+        img3 = big
+        img = cv2.cvtColor(big, cv2.COLOR_BGR2GRAY)  # 图像灰度化
+    else:
+        print("是图片")
+        img = cv2.imread(big, 0)  # 0 读入灰度图  大图
+        img3 = cv2.imread(big, 1)  # 1 读入彩色图  大图
+
+    # template = cv2.imread(small, 0)  # 小图
+    template = image_read_from_chinese_path(image_file_name=small, mode=0)  # 小图
+    w, h = template.shape[::-1]  # 高宽转成  宽高
+
+    method = cv2.TM_CCOEFF_NORMED
+    # 应用模板算法，返回一系列指标
+    res = cv2.matchTemplate(img, template, method)
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)  # 从res中挑选最优指标
+
+    if max_val < xiangsidu:
+        print("找不到图片 建议调整  降低相似度")
+        return
+    else:
+        print("相似度:", max_val)
+
+    # 注意 TM_SQDIFF 或者 TM_SQDIFF_NORMED 算法使用最小值为最优
+    if method in [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:
+        top_left = min_loc
+    else:
+        top_left = max_loc
+    bottom_right = (top_left[0] + w, top_left[1] + h)
+
+    # 中心点
+    click_point = tuple((x + y) / 2 for x, y in zip(top_left, bottom_right))
+    center_p = tuple((x + y) / 2 for x, y in zip(top_left, bottom_right))
+    # 中心点 不用了  直接用我指定的点
+    click_point = (center_p[0]+pianliangxy[0],center_p[1]+pianliangxy[1])
+    pyautogui.moveTo(click_point[0], click_point[1])  # 移动
+    # pyautogui.click(x=click_point[0], y=click_point[1], duration=0.1)  # 点击
+
+    print(click_point,type(click_point))
+    return click_point
 
 # 持久当前范围寻找
 @timer
@@ -284,6 +350,60 @@ def find_pic_click_center_keep(small, jieshu_tezheng=None, info=None, xiangsidu=
         except:
             pass
 
+# 持久当前范围寻找 + 点击偏移量
+@timer
+def find_pic_click_center_pianyixy_keep(small, pianliangxy, jieshu_tezheng=None, info=None, xiangsidu=0.98,time_sleep=0.01):
+    r"""
+    只能当前屏幕 持久寻找  可以添加偏移量
+    期望 点击之后 能回到原来位置
+    from find_pic import find_pic_click_center_keep,gdiScreenCapture,find_pic_move_xy
+    find_pic_move_xy(small=p(1), big=gdiScreenCapture(), pianliangxy=(92,-68),xiangsidu=0.90)
+    find_pic_click_center_pianyixy_keep(small="001.png", pianliangxy=(92,-68), jieshu_tezheng=None, info=None, xiangsidu=0.98)
+    find_pic_click_center_pianyixy_keep(small=p(1), pianliangxy=(120,0), jieshu_tezheng=None, info=None, xiangsidu=0.90,time_sleep=0.01)
+    """
+    while 1:
+        time.sleep(time_sleep)
+        try:
+            p2 = find_pic_move_xy(small=small, big=gdiScreenCapture(), pianliangxy=(pianliangxy[0],-pianliangxy[1]),xiangsidu=xiangsidu)
+            if info:
+                print(info)
+            # p2 = find_rectangle_show(small = shop, big=gdiScreenCapture())
+            if p2:
+                pyautogui.click(x=p2[0], y=p2[1], duration=0.1)  # 点击
+                return p2  # click_point
+            elif jieshu_tezheng:
+                if find_have(small=jieshu_tezheng):
+                    return 1
+        except:
+            pass
+
+# 持久当前范围寻找 + 点击偏移量+回到原来位置
+@timer
+def find_pic_click_center_pianyixy_keep_back(small, pianliangxy, jieshu_tezheng=None, info=None, xiangsidu=0.98,time_sleep=0.01):
+    r"""
+    只能当前屏幕 持久寻找  可以添加偏移量
+    期望 点击之后 能回到原来位置
+    from find_pic import find_pic_click_center_keep,gdiScreenCapture,find_pic_move_xy
+    find_pic_move_xy(small=p(1), big=gdiScreenCapture(), pianliangxy=(92,-68),xiangsidu=0.90)
+    find_pic_click_center_pianyixy_keep(small="001.png", pianliangxy=(92,-68), jieshu_tezheng=None, info=None, xiangsidu=0.98)
+    find_pic_click_center_pianyixy_keep(small=p(1), pianliangxy=(120,0), jieshu_tezheng=None, info=None, xiangsidu=0.90,time_sleep=0.01)
+    """
+    while 1:
+        try:
+            p2 = find_pic_move_xy(small=small, big=gdiScreenCapture(), pianliangxy=(pianliangxy[0],-pianliangxy[1]),xiangsidu=xiangsidu)
+            if info:
+                print(info)
+            # p2 = find_rectangle_show(small = shop, big=gdiScreenCapture())
+            if p2:
+                pyautogui.click(x=p2[0], y=p2[1], duration=0.1)  # 点击
+                return p2  # click_point
+            elif jieshu_tezheng:
+                if find_have(small=jieshu_tezheng):
+                    return 1
+        except:
+            pass
+
+        time.sleep(time_sleep)
 
 # 如果找到目标
 @timer
@@ -397,5 +517,5 @@ if __name__ == '__main__':
     # find_rectangle_save(small, big)  # 执行时间：0.18550801277160645 秒
     # find_rectangle_show(small, big)  # 执行时间：0.18550801277160645 秒
     # find_pic_click_center(small, big)  # 执行时间：0.12166190147399902 秒
-    im1 = "D:\0-code\rust_pro\rust_pro_git\编程语法\Python3\tool\dc\img\kucun\001.png"
+    im1 = r"D:\0-code\rust_pro\rust_pro_git\编程语法\Python3\tool\dc\img\kucun\001.png"
     find_pic_click_center_keep(small=im1, jieshu_tezheng=None, info='1', xiangsidu=0.98)
