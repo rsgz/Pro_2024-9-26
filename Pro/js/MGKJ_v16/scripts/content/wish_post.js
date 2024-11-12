@@ -24,10 +24,10 @@ $(function (){
             if(request.denglu=="wishpost"){
                 console.log("我登录了 wishpost")
                 var input_denglu = $('form[novalidate="novalidate"]')[0].querySelectorAll('input')[0]
-                input_value(input2=input_denglu,value="2551740153@qq.com")
+                input_value(input2=input_denglu,value="xxx")
 
                 var input_mima = $('form[novalidate="novalidate"]')[0].querySelectorAll('input')[1]
-                input_value(input2=input_mima,value="Mgkj@2021")
+                input_value(input2=input_mima,value="xxx")
 
                 $('div.v-input--selection-controls__ripple')[0].click();
                 await delay(500);
